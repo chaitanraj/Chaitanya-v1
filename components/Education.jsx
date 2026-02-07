@@ -34,46 +34,48 @@ export default function Education() {
                         initial={{ opacity: 0, y: 30 }}
                         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                         transition={{ delay: 0.2 }}
-                        className="glass-card p-8 relative overflow-hidden group hover:border-accent-cyan/30 transition-colors"
+                        className="glass-card p-8 relative overflow-hidden group hover:border-[#ff7a18]/30 transition-colors"
                     >
-                        {/* Animated Gradient Underline */}
+                        {/* Animated Gradient Underline - Orange → Pink → Purple */}
                         <motion.div
                             initial={{ scaleX: 0 }}
                             animate={isInView ? { scaleX: 1 } : { scaleX: 0 }}
                             transition={{ delay: 0.5, duration: 0.8 }}
-                            className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-accent-cyan via-accent-purple to-accent-pink origin-left"
+                            className="absolute bottom-0 left-0 right-0 h-1 origin-left"
+                            style={{ background: "linear-gradient(90deg, #ff7a18, #ff4d6d, #c918ff)" }}
                         />
 
                         <div className="flex flex-col md:flex-row gap-6">
                             {/* Icon */}
-                            <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-accent-cyan/20 to-accent-purple/20 border border-white/10 flex items-center justify-center group-hover:scale-110 transition-transform">
-                                <GraduationCap size={40} className="text-accent-cyan" />
+                            <div className="w-20 h-20 rounded-2xl border border-white/10 flex items-center justify-center group-hover:scale-110 transition-transform"
+                                style={{ background: "linear-gradient(135deg, rgba(255,122,24,0.2), rgba(201,24,255,0.2))" }}>
+                                <GraduationCap size={40} className="text-[#ff7a18]" />
                             </div>
 
                             {/* Content */}
                             <div className="flex-1">
-                                <h3 className="text-xl font-bold heading-font text-text-primary">
+                                <h3 className="text-xl font-bold heading-font text-white">
                                     {education.degree}
                                 </h3>
-                                <p className="text-accent-purple font-medium text-lg">
+                                <p className="text-[#c918ff] font-medium text-lg">
                                     {education.university}
                                 </p>
 
                                 {/* Stats */}
                                 <div className="flex flex-wrap gap-6 mt-6">
-                                    <div className="flex items-center gap-2 px-4 py-2 rounded-lg bg-background-secondary border border-white/5">
-                                        <Award size={18} className="text-accent-cyan" />
+                                    <div className="flex items-center gap-2 px-4 py-2 rounded-lg bg-[#0B0B0F] border border-white/5">
+                                        <Award size={18} className="text-[#ff7a18]" />
                                         <div>
-                                            <span className="text-text-muted text-xs block">GPA</span>
-                                            <span className="text-text-primary font-bold">{education.gpa}</span>
+                                            <span className="text-[rgba(255,255,255,0.5)] text-xs block">GPA</span>
+                                            <span className="text-white font-bold">{education.gpa}</span>
                                         </div>
                                     </div>
 
-                                    <div className="flex items-center gap-2 px-4 py-2 rounded-lg bg-background-secondary border border-white/5">
-                                        <Calendar size={18} className="text-accent-purple" />
+                                    <div className="flex items-center gap-2 px-4 py-2 rounded-lg bg-[#0B0B0F] border border-white/5">
+                                        <Calendar size={18} className="text-[#c918ff]" />
                                         <div>
-                                            <span className="text-text-muted text-xs block">Expected</span>
-                                            <span className="text-text-primary font-bold">{education.year}</span>
+                                            <span className="text-[rgba(255,255,255,0.5)] text-xs block">Expected</span>
+                                            <span className="text-white font-bold">{education.year}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -81,7 +83,7 @@ export default function Education() {
                         </div>
 
                         {/* Decorative Glow */}
-                        <div className="absolute -right-10 -top-10 w-40 h-40 bg-accent-cyan/10 rounded-full blur-3xl group-hover:bg-accent-cyan/20 transition-colors" />
+                        <div className="absolute -right-10 -top-10 w-40 h-40 bg-[#ff7a18]/10 rounded-full blur-3xl group-hover:bg-[#ff7a18]/20 transition-colors" />
                     </motion.div>
                 </motion.div>
             </div>

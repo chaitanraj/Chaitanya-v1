@@ -52,9 +52,10 @@ export default function Contact() {
                         <h2 className="text-heading font-bold heading-font text-gradient">
                             Let's Work Together
                         </h2>
-                        <p className="text-text-secondary text-lg mt-4 max-w-2xl mx-auto">
-                            I'm currently looking for internship and full-time opportunities.
-                            Let's connect and build something amazing together.
+                        <p className="text-[rgba(255,255,255,0.7)] text-lg mt-4 max-w-2xl mx-auto">
+                            I'm currently looking for internship and full-time opportunities. If you're looking
+                            for someone who can build complete applications with clean code and
+                            scalable architecture — let's connect.
                         </p>
                     </motion.div>
 
@@ -67,7 +68,7 @@ export default function Contact() {
                             className="space-y-6"
                         >
                             <div className="glass-card p-6">
-                                <h3 className="text-lg font-semibold heading-font text-text-primary mb-6">
+                                <h3 className="text-lg font-semibold heading-font text-white mb-6">
                                     Get in Touch
                                 </h3>
 
@@ -75,14 +76,14 @@ export default function Contact() {
                                     {/* Email */}
                                     <a
                                         href={`mailto:${personalInfo.email}`}
-                                        className="flex items-center gap-4 p-4 glass-card hover:border-accent-cyan/30 transition-all group"
+                                        className="flex items-center gap-4 p-4 glass-card hover:border-[#ff7a18]/30 transition-all group"
                                     >
-                                        <div className="p-3 rounded-lg bg-accent-cyan/10 border border-accent-cyan/20">
-                                            <Mail size={20} className="text-accent-cyan" />
+                                        <div className="p-3 rounded-lg bg-[#ff7a18]/10 border border-[#ff7a18]/20">
+                                            <Mail size={20} className="text-[#ff7a18]" />
                                         </div>
                                         <div>
-                                            <span className="text-text-muted text-xs">Email</span>
-                                            <p className="text-text-primary group-hover:text-accent-cyan transition-colors">
+                                            <span className="text-[rgba(255,255,255,0.5)] text-xs">Email</span>
+                                            <p className="text-white group-hover:text-[#ff7a18] transition-colors">
                                                 {personalInfo.email}
                                             </p>
                                         </div>
@@ -93,14 +94,14 @@ export default function Contact() {
                                         href={`https://linkedin.com/in/${personalInfo.linkedin.toLowerCase().replace(" ", "-")}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="flex items-center gap-4 p-4 glass-card hover:border-accent-purple/30 transition-all group"
+                                        className="flex items-center gap-4 p-4 glass-card hover:border-[#ff4d6d]/30 transition-all group"
                                     >
-                                        <div className="p-3 rounded-lg bg-accent-purple/10 border border-accent-purple/20">
-                                            <Linkedin size={20} className="text-accent-purple" />
+                                        <div className="p-3 rounded-lg bg-[#ff4d6d]/10 border border-[#ff4d6d]/20">
+                                            <Linkedin size={20} className="text-[#ff4d6d]" />
                                         </div>
                                         <div>
-                                            <span className="text-text-muted text-xs">LinkedIn</span>
-                                            <p className="text-text-primary group-hover:text-accent-purple transition-colors">
+                                            <span className="text-[rgba(255,255,255,0.5)] text-xs">LinkedIn</span>
+                                            <p className="text-white group-hover:text-[#ff4d6d] transition-colors">
                                                 {personalInfo.linkedin}
                                             </p>
                                         </div>
@@ -111,14 +112,14 @@ export default function Contact() {
                                         href={`https://github.com/${personalInfo.github}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="flex items-center gap-4 p-4 glass-card hover:border-accent-pink/30 transition-all group"
+                                        className="flex items-center gap-4 p-4 glass-card hover:border-[#c918ff]/30 transition-all group"
                                     >
-                                        <div className="p-3 rounded-lg bg-accent-pink/10 border border-accent-pink/20">
-                                            <Github size={20} className="text-accent-pink" />
+                                        <div className="p-3 rounded-lg bg-[#c918ff]/10 border border-[#c918ff]/20">
+                                            <Github size={20} className="text-[#c918ff]" />
                                         </div>
                                         <div>
-                                            <span className="text-text-muted text-xs">GitHub</span>
-                                            <p className="text-text-primary group-hover:text-accent-pink transition-colors">
+                                            <span className="text-[rgba(255,255,255,0.5)] text-xs">GitHub</span>
+                                            <p className="text-white group-hover:text-[#c918ff] transition-colors">
                                                 {personalInfo.github}
                                             </p>
                                         </div>
@@ -126,12 +127,12 @@ export default function Contact() {
 
                                     {/* Location */}
                                     <div className="flex items-center gap-4 p-4 glass-card">
-                                        <div className="p-3 rounded-lg bg-background-secondary border border-white/5">
-                                            <MapPin size={20} className="text-text-muted" />
+                                        <div className="p-3 rounded-lg bg-white/5 border border-white/5">
+                                            <MapPin size={20} className="text-[rgba(255,255,255,0.5)]" />
                                         </div>
                                         <div>
-                                            <span className="text-text-muted text-xs">Location</span>
-                                            <p className="text-text-primary">
+                                            <span className="text-[rgba(255,255,255,0.5)] text-xs">Location</span>
+                                            <p className="text-white">
                                                 {personalInfo.location || "Greater Noida, India"}
                                             </p>
                                         </div>
@@ -147,12 +148,12 @@ export default function Contact() {
                             transition={{ delay: 0.3 }}
                         >
                             <form onSubmit={handleSubmit} className="glass-card p-6 space-y-6">
-                                <h3 className="text-lg font-semibold heading-font text-text-primary mb-4">
+                                <h3 className="text-lg font-semibold heading-font text-white mb-4">
                                     Send a Message
                                 </h3>
 
                                 <div>
-                                    <label htmlFor="name" className="text-text-muted text-sm block mb-2">
+                                    <label htmlFor="name" className="text-[rgba(255,255,255,0.5)] text-sm block mb-2">
                                         Name
                                     </label>
                                     <Input
@@ -166,7 +167,7 @@ export default function Contact() {
                                 </div>
 
                                 <div>
-                                    <label htmlFor="email" className="text-text-muted text-sm block mb-2">
+                                    <label htmlFor="email" className="text-[rgba(255,255,255,0.5)] text-sm block mb-2">
                                         Email
                                     </label>
                                     <Input
@@ -181,7 +182,7 @@ export default function Contact() {
                                 </div>
 
                                 <div>
-                                    <label htmlFor="message" className="text-text-muted text-sm block mb-2">
+                                    <label htmlFor="message" className="text-[rgba(255,255,255,0.5)] text-sm block mb-2">
                                         Message
                                     </label>
                                     <Textarea

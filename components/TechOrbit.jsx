@@ -30,7 +30,7 @@ function TechIcon({ tech, index, total, orbitRadius, isHovered, onHover }) {
             initial={{ opacity: 0, scale: 0 }}
             animate={{
                 opacity: 1,
-                scale: isActive ? 1.2 : 1,
+                scale: isActive ? 1.15 : 1,
                 x: x,
                 y: y,
             }}
@@ -44,12 +44,12 @@ function TechIcon({ tech, index, total, orbitRadius, isHovered, onHover }) {
             className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer"
         >
             <div className={`
-                p-4 rounded-2xl glass-card transition-all duration-300
-                ${isActive ? 'neon-glow border-accent-cyan/50' : ''}
+                p-3 rounded-xl glass-card transition-all duration-300
+                ${isActive ? 'neon-glow border-[#ff7a18]/50' : ''}
             `}>
                 <Icon
-                    size={28}
-                    className={`transition-colors ${isActive ? 'text-accent-cyan' : 'text-text-muted'
+                    size={22}
+                    className={`transition-colors ${isActive ? 'text-[#ff7a18]' : 'text-[rgba(255,255,255,0.5)]'
                         }`}
                 />
             </div>
@@ -57,13 +57,12 @@ function TechIcon({ tech, index, total, orbitRadius, isHovered, onHover }) {
             {/* Tooltip */}
             {isActive && (
                 <motion.div
-                    initial={{ opacity: 0, y: 10 }}
+                    initial={{ opacity: 0, y: 8 }}
                     animate={{ opacity: 1, y: 0 }}
                     className="absolute top-full left-1/2 -translate-x-1/2 mt-2 whitespace-nowrap"
                 >
-                    <div className="px-3 py-1.5 bg-background-secondary rounded-lg border border-white/10 text-sm">
-                        <span className="font-semibold text-text-primary">{tech.name}</span>
-                        <p className="text-text-muted text-xs mt-0.5">{tech.description}</p>
+                    <div className="px-2 py-1 bg-[#0B0B0F] rounded-lg border border-white/10 text-xs">
+                        <span className="font-semibold text-white">{tech.name}</span>
                     </div>
                 </motion.div>
             )}
@@ -87,7 +86,8 @@ export default function TechOrbit() {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, margin: "-100px" });
 
-    const orbitRadius = 180;
+    // Smaller orbit radius for narrower viewport
+    const orbitRadius = 130;
 
     return (
         <section id="stack" className="relative overflow-hidden">
@@ -103,7 +103,7 @@ export default function TechOrbit() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                         transition={{ delay: 0.1 }}
-                        className="text-heading font-bold heading-font text-gradient text-center mb-4"
+                        className="text-heading font-bold heading-font text-gradient text-center mb-3"
                     >
                         Tech Stack
                     </motion.h2>
@@ -111,26 +111,33 @@ export default function TechOrbit() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                         transition={{ delay: 0.2 }}
-                        className="text-text-secondary text-center mb-16 max-w-xl mx-auto"
+                        className="text-[rgba(255,255,255,0.6)] text-center text-sm mb-10 max-w-md mx-auto"
                     >
-                        Technologies I work with to build scalable, production-ready applications
+                        Technologies I use to build scalable applications
                     </motion.p>
 
                     {/* Orbit Container - Desktop */}
                     <div className="hidden md:block">
-                        <div className="relative h-[500px] max-w-[500px] mx-auto">
+                        <div className="relative h-[360px] max-w-[360px] mx-auto">
                             {/* Orbit Rings */}
                             <OrbitRing radius={orbitRadius} duration={60} />
-                            <OrbitRing radius={orbitRadius * 0.6} duration={45} reverse />
+                            <OrbitRing radius={orbitRadius * 0.55} duration={45} reverse />
 
-                            {/* Center Sphere */}
+                            {/* Center Sphere - Orange → Pink → Purple gradient */}
                             <motion.div
                                 initial={{ opacity: 0, scale: 0 }}
                                 animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0 }}
                                 transition={{ delay: 0.3, type: "spring" }}
-                                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 rounded-full bg-gradient-to-br from-accent-cyan via-accent-purple to-accent-pink neon-glow flex items-center justify-center"
+                                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full flex items-center justify-center"
+                                style={{
+                                    background: "linear-gradient(135deg, #ff7a18, #ff4d6d, #c918ff)",
+                                    boxShadow: "0 0 30px rgba(255, 77, 109, 0.4)"
+                                }}
                             >
-                                <LucideIcons.Zap size={36} className="text-white" />
+                                <div className="text-center">
+                                    <span className="text-white font-bold text-[10px] block">FULL</span>
+                                    <span className="text-white font-bold text-[10px] block">STACK</span>
+                                </div>
                             </motion.div>
 
                             {/* Tech Icons */}
@@ -149,7 +156,7 @@ export default function TechOrbit() {
                     </div>
 
                     {/* Grid Layout - Mobile */}
-                    <div className="md:hidden grid grid-cols-3 gap-4">
+                    <div className="md:hidden grid grid-cols-4 gap-3">
                         {orbitTechs.map((tech, index) => {
                             const Icon = iconMap[tech.icon] || LucideIcons.Code2;
                             return (
@@ -158,10 +165,10 @@ export default function TechOrbit() {
                                     initial={{ opacity: 0, scale: 0.8 }}
                                     animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
                                     transition={{ delay: index * 0.05 }}
-                                    className="glass-card p-4 flex flex-col items-center gap-2"
+                                    className="glass-card p-3 flex flex-col items-center gap-1"
                                 >
-                                    <Icon size={24} className="text-accent-cyan" />
-                                    <span className="text-xs text-text-secondary text-center">{tech.name}</span>
+                                    <Icon size={18} className="text-[#ff7a18]" />
+                                    <span className="text-[10px] text-[rgba(255,255,255,0.6)] text-center">{tech.name}</span>
                                 </motion.div>
                             );
                         })}

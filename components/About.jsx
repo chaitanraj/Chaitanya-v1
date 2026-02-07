@@ -35,7 +35,7 @@ export default function About() {
                         transition={{ delay: 0.2 }}
                         className="glass-card p-8 mb-12"
                     >
-                        <p className="text-text-secondary text-lg leading-relaxed whitespace-pre-line">
+                        <p className="text-[rgba(255,255,255,0.7)] text-lg leading-relaxed whitespace-pre-line">
                             {aboutText}
                         </p>
                     </motion.div>
@@ -46,12 +46,15 @@ export default function About() {
                         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                         transition={{ delay: 0.3 }}
                     >
-                        <h3 className="text-xl font-semibold heading-font text-text-primary mb-6">
+                        <h3 className="text-xl font-semibold heading-font text-white mb-6">
                             Developer Journey
                         </h3>
                         <div className="relative">
-                            {/* Timeline Line */}
-                            <div className="absolute left-[7px] top-2 bottom-2 w-[2px] bg-gradient-to-b from-accent-cyan via-accent-purple to-accent-pink" />
+                            {/* Timeline Line - Orange → Pink → Purple gradient */}
+                            <div
+                                className="absolute left-[7px] top-2 bottom-2 w-[2px]"
+                                style={{ background: "linear-gradient(to bottom, #ff7a18, #ff4d6d, #c918ff)" }}
+                            />
 
                             {/* Timeline Items */}
                             <div className="space-y-6">
@@ -63,15 +66,15 @@ export default function About() {
                                         transition={{ delay: 0.4 + index * 0.1 }}
                                         className="flex items-start gap-6 group"
                                     >
-                                        {/* Dot */}
-                                        <div className="relative z-10 w-4 h-4 rounded-full bg-accent-cyan shadow-[0_0_15px_rgba(6,182,212,0.5)] group-hover:scale-125 transition-transform" />
+                                        {/* Dot - Orange glow */}
+                                        <div className="relative z-10 w-4 h-4 rounded-full bg-[#ff7a18] shadow-[0_0_15px_rgba(255,122,24,0.5)] group-hover:scale-125 transition-transform" />
 
                                         {/* Content */}
                                         <div className="flex-1 pb-2">
-                                            <span className="text-accent-cyan font-semibold text-sm">
+                                            <span className="text-[#ff7a18] font-semibold text-sm">
                                                 {item.year}
                                             </span>
-                                            <p className="text-text-secondary mt-1">
+                                            <p className="text-[rgba(255,255,255,0.7)] mt-1">
                                                 {item.text}
                                             </p>
                                         </div>

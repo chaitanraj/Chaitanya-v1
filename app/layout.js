@@ -31,11 +31,26 @@ export default function RootLayout({ children }) {
       <body
         className={`${spaceGrotesk.variable} ${inter.variable} antialiased`}
       >
-        {/* Background effects */}
-        <div className="mesh-gradient" />
-        <div className="grid-bg" />
+        {/* Main Layout Container */}
+        <div className="layout-wrapper">
+          {/* Left Side Panel with Grid Pattern */}
+          <div className="side-panel side-panel-left">
+            <div className="side-grid-pattern"></div>
+          </div>
 
-        {children}
+          {/* Main Content Area (60%) */}
+          <div className="main-content-wrapper">
+            {/* Background effects inside main content */}
+            <div className="mesh-gradient" />
+            <div className="glow-blob-pink" />
+            {children}
+          </div>
+
+          {/* Right Side Panel with Grid Pattern */}
+          <div className="side-panel side-panel-right">
+            <div className="side-grid-pattern"></div>
+          </div>
+        </div>
       </body>
     </html>
   );

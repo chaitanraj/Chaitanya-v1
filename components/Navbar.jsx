@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Moon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { navLinks, personalInfo } from "@/lib/data";
@@ -48,13 +48,13 @@ export default function Navbar() {
             initial={{ y: -100 }}
             animate={{ y: 0 }}
             transition={{ duration: 0.5 }}
-            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
-                    ? "bg-background/80 backdrop-blur-xl border-b border-white/5"
-                    : "bg-transparent"
+            className={`sticky top-0 z-50 transition-all duration-300 ${isScrolled
+                ? "navbar-glass"
+                : "bg-transparent"
                 }`}
         >
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex items-center justify-between h-16">
+            <div className="w-full px-4 sm:px-6">
+                <div className="flex items-center justify-between h-14">
                     {/* Logo */}
                     <motion.div
                         whileHover={{ scale: 1.05 }}
@@ -66,38 +66,36 @@ export default function Navbar() {
                                 e.preventDefault();
                                 scrollToSection("#hero");
                             }}
-                            className="text-xl font-bold heading-font text-gradient"
+                            className="text-lg font-bold heading-font text-gradient"
                         >
-                            {personalInfo.name.split(" ")[0]}
-                            <span className="text-accent-cyan">.</span>
+                            CR
                         </Link>
                     </motion.div>
 
                     {/* Desktop Navigation */}
-                    <div className="hidden md:flex items-center gap-1">
+                    <div className="hidden md:flex items-center gap-0.5">
                         {navLinks.map((link) => (
                             <motion.button
                                 key={link.name}
                                 onClick={() => scrollToSection(link.href)}
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
-                                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${activeSection === link.href.replace("#", "")
-                                        ? "text-accent-cyan bg-accent-cyan/10"
-                                        : "text-text-secondary hover:text-text-primary hover:bg-white/5"
+                                className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${activeSection === link.href.replace("#", "")
+                                    ? "text-[#ff7a18] bg-[#ff7a18]/10"
+                                    : "text-[rgba(255,255,255,0.6)] hover:text-white hover:bg-white/5"
                                     }`}
                             >
                                 {link.name}
                             </motion.button>
                         ))}
-                    </div>
-
-                    {/* Resume Button - Desktop */}
-                    <div className="hidden md:block">
-                        <Button variant="primary" size="sm" asChild>
-                            <a href={personalInfo.resumeUrl} target="_blank" rel="noopener noreferrer">
-                                Resume
-                            </a>
-                        </Button>
+                        {/* Dark Mode Icon (decorative) */}
+                        <motion.button
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.95 }}
+                            className="ml-1 p-1.5 rounded-lg text-[rgba(255,255,255,0.4)] hover:text-[#ff7a18] hover:bg-white/5 transition-all"
+                        >
+                            <Moon size={14} />
+                        </motion.button>
                     </div>
 
                     {/* Mobile Menu Button */}
@@ -105,26 +103,26 @@ export default function Navbar() {
                         <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
                             <SheetTrigger asChild>
                                 <button className="p-2 rounded-lg hover:bg-white/5 transition-colors">
-                                    <Menu size={24} className="text-text-primary" />
+                                    <Menu size={20} className="text-white" />
                                 </button>
                             </SheetTrigger>
                             <SheetContent side="right">
-                                <div className="flex flex-col gap-4 mt-8">
+                                <div className="flex flex-col gap-3 mt-8">
                                     {navLinks.map((link) => (
                                         <motion.button
                                             key={link.name}
                                             onClick={() => scrollToSection(link.href)}
                                             whileTap={{ scale: 0.95 }}
-                                            className={`px-4 py-3 rounded-lg text-left font-medium transition-all ${activeSection === link.href.replace("#", "")
-                                                    ? "text-accent-cyan bg-accent-cyan/10"
-                                                    : "text-text-secondary hover:text-text-primary hover:bg-white/5"
+                                            className={`px-4 py-2.5 rounded-lg text-left text-sm font-medium transition-all ${activeSection === link.href.replace("#", "")
+                                                ? "text-[#ff7a18] bg-[#ff7a18]/10"
+                                                : "text-[rgba(255,255,255,0.7)] hover:text-white hover:bg-white/5"
                                                 }`}
                                         >
                                             {link.name}
                                         </motion.button>
                                     ))}
                                     <div className="pt-4 border-t border-white/10">
-                                        <Button variant="primary" className="w-full" asChild>
+                                        <Button variant="primary" className="w-full" size="sm" asChild>
                                             <a href={personalInfo.resumeUrl} target="_blank" rel="noopener noreferrer">
                                                 Resume
                                             </a>

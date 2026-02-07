@@ -12,10 +12,12 @@ const Button = forwardRef(({
     ...props
 }, ref) => {
     const variants = {
-        primary: "bg-gradient-to-r from-accent-cyan to-accent-purple text-white hover:shadow-lg hover:shadow-accent-cyan/25 hover:-translate-y-0.5",
-        secondary: "bg-white/5 text-text-primary border border-white/10 hover:bg-white/10 hover:border-accent-cyan/50",
+        // Primary CTA button with orange → pink → purple gradient
+        primary: "bg-gradient-to-r from-[#ff7a18] via-[#ff4d6d] to-[#c918ff] text-white hover:shadow-[0_0_25px_rgba(255,77,109,0.35)] hover:-translate-y-0.5",
+        // Secondary glass button
+        secondary: "bg-white/5 text-text-primary border border-white/15 hover:bg-white/10 hover:border-[#ff7a18]/50 hover:shadow-[0_0_20px_rgba(255,122,24,0.1)]",
         ghost: "text-text-secondary hover:text-text-primary hover:bg-white/5",
-        icon: "p-2 text-text-muted hover:text-text-primary hover:bg-white/5 rounded-lg",
+        icon: "p-2 text-text-muted hover:text-[#ff7a18] hover:bg-white/5 rounded-lg",
     };
 
     const sizes = {
@@ -25,7 +27,7 @@ const Button = forwardRef(({
     };
 
     const buttonClassName = cn(
-        "inline-flex items-center justify-center font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-accent-cyan/50 disabled:opacity-50 disabled:pointer-events-none",
+        "inline-flex items-center justify-center font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#ff7a18]/50 disabled:opacity-50 disabled:pointer-events-none",
         variants[variant],
         sizes[size],
         variant !== "icon" && "rounded-xl",

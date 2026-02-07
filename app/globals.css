@@ -3,20 +3,40 @@
 @import "tailwindcss";
 
 /* ============================================
-   CUSTOM THEME - Cyber Color Palette
+   CUSTOM THEME - Dark Glassmorphism Cyber Palette
+   Orange → Pink → Purple Neon Glow
    ============================================ */
 
 @theme inline {
-  --color-background: #0A0A0B;
-  --color-background-secondary: #141416;
-  --color-background-tertiary: #1C1C1F;
-  --color-accent-cyan: #06B6D4;
-  --color-accent-purple: #A855F7;
-  --color-accent-pink: #EC4899;
-  --color-accent-blue: #3B82F6;
-  --color-text-primary: #FAFAFA;
-  --color-text-secondary: #A1A1AA;
-  --color-text-muted: #71717A;
+  /* Background Colors */
+  --color-background: #050505;
+  --color-background-secondary: #0B0B0F;
+  --color-background-tertiary: #121216;
+  --color-section-overlay: rgba(0, 0, 0, 0.35);
+  --color-glass-tint: rgba(255, 255, 255, 0.04);
+
+  /* Accent Colors - Orange → Pink → Purple */
+  --color-accent-orange: #ff7a18;
+  --color-accent-pink: #ff4d6d;
+  --color-accent-purple: #c918ff;
+  --color-accent-orange-light: #ff9a3d;
+
+  /* Text Colors */
+  --color-text-primary: #FFFFFF;
+  --color-text-secondary: rgba(255, 255, 255, 0.7);
+  --color-text-muted: rgba(255, 255, 255, 0.5);
+  --color-text-disabled: rgba(255, 255, 255, 0.35);
+
+  /* Glass Effects */
+  --color-glass-bg: rgba(255, 255, 255, 0.05);
+  --color-glass-border: rgba(255, 255, 255, 0.08);
+
+  /* Glow Colors */
+  --color-glow-orange: rgba(255, 122, 24, 0.35);
+  --color-glow-pink: rgba(255, 77, 109, 0.25);
+  --color-glow-purple: rgba(201, 24, 255, 0.35);
+
+  /* Fonts */
   --font-sans: 'Inter', sans-serif;
   --font-heading: 'Space Grotesk', sans-serif;
 }
@@ -38,6 +58,11 @@ body {
   color: var(--color-text-primary);
   font-family: var(--font-sans);
   line-height: 1.6;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
 }
 
 /* Heading font class */
@@ -46,129 +71,254 @@ body {
 }
 
 /* ============================================
-   TYPOGRAPHY
+   PHONE-STYLE LAYOUT (20-60-20)
+   ============================================ */
+
+.layout-wrapper {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+}
+
+/* Side Panels - 25% each */
+.side-panel {
+  width: 25%;
+  min-height: 100vh;
+  position: fixed;
+  top: 0;
+  background: #020202;
+  z-index: 10;
+}
+
+.side-panel-left {
+  left: 0;
+  border-right: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.side-panel-right {
+  right: 0;
+  border-left: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+/* Grid Pattern for Side Panels */
+.side-grid-pattern {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Dot Pattern Overlay */
+.side-grid-pattern::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 20px 20px;
+  background-position: 10px 10px;
+}
+
+/* Subtle gradient fade on inner edges */
+.side-panel-left .side-grid-pattern::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 60px;
+  height: 100%;
+  background: linear-gradient(to left, rgba(5, 5, 5, 0.9), transparent);
+}
+
+.side-panel-right .side-grid-pattern::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 60px;
+  height: 100%;
+  background: linear-gradient(to right, rgba(5, 5, 5, 0.9), transparent);
+}
+
+/* Main Content Wrapper - 60% centered */
+.main-content-wrapper {
+  width: 60%;
+  margin-left: 20%;
+  min-height: 100vh;
+  position: relative;
+  background: var(--color-background);
+  z-index: 20;
+  /* Subtle inner shadow for depth */
+  box-shadow:
+    -20px 0 60px rgba(0, 0, 0, 0.5),
+    20px 0 60px rgba(0, 0, 0, 0.5);
+}
+
+/* Mobile: Full width, no side panels */
+@media (max-width: 1200px) {
+  .side-panel {
+    display: none;
+  }
+
+  .main-content-wrapper {
+    width: 100%;
+    margin-left: 0;
+    box-shadow: none;
+  }
+}
+
+/* ============================================
+   MAIN GRADIENT (MOST IMPORTANT)
+   Orange → Pink → Purple
+   ============================================ */
+
+.gradient-main {
+  background: linear-gradient(90deg, #ff7a18 0%, #ff4d6d 50%, #c918ff 100%);
+}
+
+/* ============================================
+   TYPOGRAPHY - GRADIENT TEXT
+   Adjusted sizes for narrower viewport
    ============================================ */
 
 .text-gradient {
-  background: linear-gradient(135deg, var(--color-accent-cyan), var(--color-accent-purple));
+  background: linear-gradient(90deg, #ff7a18 0%, #ff4d6d 50%, #c918ff 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .text-gradient-pink {
-  background: linear-gradient(135deg, var(--color-accent-pink), var(--color-accent-purple));
+  background: linear-gradient(90deg, #ff4d6d 0%, #c918ff 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
+/* Adjusted font sizes for 60% viewport */
 .text-display {
-  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-size: clamp(2rem, 4vw, 3.5rem);
   font-weight: 700;
   line-height: 1.1;
 }
 
 .text-heading {
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
   font-weight: 700;
   line-height: 1.2;
 }
 
 .text-subheading {
-  font-size: clamp(1.125rem, 2vw, 1.5rem);
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
   line-height: 1.4;
 }
 
 /* ============================================
-   SECTION CONTAINER
+   SECTION CONTAINER - Adjusted for narrow view
    ============================================ */
 
 .section-container {
-  max-width: 1200px;
+  max-width: 100%;
   margin: 0 auto;
-  padding: 80px 24px;
+  padding: 60px 32px;
 }
 
 @media (max-width: 768px) {
   .section-container {
-    padding: 60px 16px;
+    padding: 40px 20px;
   }
 }
 
 /* ============================================
-   GLASS CARD
+   GLASS CARD - Premium Glassmorphism
    ============================================ */
 
 .glass-card {
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 16px;
-  backdrop-filter: blur(10px);
-  transition: all 0.3s ease;
+  border-radius: 20px;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+  transition: all 0.4s ease;
 }
 
 .glass-card:hover {
-  border-color: rgba(6, 182, 212, 0.3);
-  box-shadow: 0 0 40px rgba(6, 182, 212, 0.1);
+  border-color: rgba(255, 122, 24, 0.3);
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.5),
+    0 0 20px rgba(255, 122, 24, 0.12),
+    0 0 30px rgba(201, 24, 255, 0.1);
 }
 
 /* ============================================
-   NEON GLOW EFFECTS
+   NEON GLOW EFFECTS - Orange/Pink/Purple
    ============================================ */
 
 .neon-glow {
   box-shadow:
-    0 0 20px rgba(6, 182, 212, 0.3),
-    0 0 40px rgba(6, 182, 212, 0.2),
-    0 0 60px rgba(6, 182, 212, 0.1);
+    0 0 15px rgba(255, 122, 24, 0.25),
+    0 0 30px rgba(255, 122, 24, 0.15),
+    0 0 45px rgba(255, 122, 24, 0.08);
+}
+
+.neon-glow-pink {
+  box-shadow:
+    0 0 15px rgba(255, 77, 109, 0.25),
+    0 0 30px rgba(255, 77, 109, 0.15),
+    0 0 45px rgba(255, 77, 109, 0.08);
 }
 
 .neon-glow-purple {
   box-shadow:
-    0 0 20px rgba(168, 85, 247, 0.3),
-    0 0 40px rgba(168, 85, 247, 0.2),
-    0 0 60px rgba(168, 85, 247, 0.1);
+    0 0 15px rgba(201, 24, 255, 0.25),
+    0 0 30px rgba(201, 24, 255, 0.15),
+    0 0 45px rgba(201, 24, 255, 0.08);
 }
 
 .neon-text {
   text-shadow:
-    0 0 10px rgba(6, 182, 212, 0.5),
-    0 0 20px rgba(6, 182, 212, 0.3);
+    0 0 10px rgba(255, 122, 24, 0.5),
+    0 0 20px rgba(255, 77, 109, 0.3);
 }
 
 /* ============================================
-   TERMINAL STYLES
+   TERMINAL STYLES - Compact for narrow view
    ============================================ */
 
 .terminal {
   background: var(--color-background-secondary);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
+  border-radius: 14px;
   font-family: 'Fira Code', 'Consolas', monospace;
   overflow: hidden;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
 }
 
 .terminal-header {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 12px 16px;
+  gap: 6px;
+  padding: 10px 14px;
   background: rgba(255, 255, 255, 0.02);
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .terminal-dot {
-  width: 12px;
-  height: 12px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
 }
 
 .cursor-blink {
   display: inline-block;
-  width: 10px;
-  height: 20px;
-  background: var(--color-accent-cyan);
+  width: 8px;
+  height: 16px;
+  background: var(--color-accent-orange);
   animation: blink 1s step-end infinite;
   margin-left: 4px;
   vertical-align: middle;
@@ -181,17 +331,30 @@ body {
 }
 
 /* ============================================
-   GRADIENT ORB ANIMATION
+   GRADIENT ORB ANIMATION - Background Blobs
    ============================================ */
 
 .gradient-orb {
   width: 300px;
   height: 300px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--color-accent-cyan), var(--color-accent-purple), var(--color-accent-pink));
-  filter: blur(80px);
-  opacity: 0.5;
-  animation: float 8s ease-in-out infinite;
+  filter: blur(150px);
+  opacity: 0.4;
+  animation: float 12s ease-in-out infinite;
+  position: absolute;
+  pointer-events: none;
+}
+
+.gradient-orb-orange {
+  background: rgba(255, 122, 24, 0.3);
+}
+
+.gradient-orb-purple {
+  background: rgba(201, 24, 255, 0.3);
+}
+
+.gradient-orb-pink {
+  background: rgba(255, 77, 109, 0.2);
 }
 
 @keyframes float {
@@ -202,36 +365,57 @@ body {
   }
 
   33% {
-    transform: translate(30px, -30px) scale(1.1);
+    transform: translate(20px, -20px) scale(1.03);
   }
 
   66% {
-    transform: translate(-20px, 20px) scale(0.95);
+    transform: translate(-15px, 15px) scale(0.97);
   }
 }
 
 /* ============================================
-   INPUT STYLES
+   INPUT STYLES - Glass Effect
    ============================================ */
 
 .input-neon {
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  padding: 14px 18px;
+  border-radius: 10px;
+  padding: 12px 16px;
   color: var(--color-text-primary);
-  font-size: 15px;
+  font-size: 14px;
   transition: all 0.3s ease;
   outline: none;
+  width: 100%;
 }
 
 .input-neon:focus {
-  border-color: var(--color-accent-cyan);
-  box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.1);
+  border-color: var(--color-accent-orange);
+  box-shadow: 0 0 0 3px rgba(255, 122, 24, 0.12);
 }
 
 .input-neon::placeholder {
-  color: var(--color-text-muted);
+  color: var(--color-text-disabled);
+}
+
+/* ============================================
+   SKILL BADGE / PILL STYLING
+   ============================================ */
+
+.skill-badge {
+  background: rgba(255, 122, 24, 0.08);
+  border: 1px solid rgba(255, 122, 24, 0.35);
+  color: #ff9a3d;
+  padding: 5px 12px;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.skill-badge:hover {
+  border-color: rgba(255, 122, 24, 0.6);
+  box-shadow: 0 0 12px rgba(255, 122, 24, 0.15);
 }
 
 /* ============================================
@@ -240,10 +424,10 @@ body {
 
 .horizontal-scroll-container {
   display: flex;
-  gap: 24px;
+  gap: 20px;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
-  padding: 20px 0;
+  padding: 16px 0;
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
@@ -258,55 +442,109 @@ body {
 }
 
 /* ============================================
-   ANIMATED BACKGROUND MESH
+   ANIMATED BACKGROUND MESH - Glow Blobs
+   Contained within main content wrapper
    ============================================ */
 
 .mesh-gradient {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   z-index: -1;
-  background:
-    radial-gradient(ellipse at 20% 20%, rgba(6, 182, 212, 0.15) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 80%, rgba(168, 85, 247, 0.15) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 50%, rgba(236, 72, 153, 0.1) 0%, transparent 60%),
-    var(--color-background);
-  animation: meshMove 20s ease-in-out infinite;
+  background: var(--color-background);
+  overflow: hidden;
+  pointer-events: none;
 }
 
-@keyframes meshMove {
+.mesh-gradient::before {
+  content: '';
+  position: absolute;
+  top: -5%;
+  left: -10%;
+  width: 350px;
+  height: 350px;
+  background: rgba(255, 122, 24, 0.3);
+  border-radius: 50%;
+  filter: blur(150px);
+  animation: floatLeft 15s ease-in-out infinite;
+}
+
+.mesh-gradient::after {
+  content: '';
+  position: absolute;
+  bottom: 10%;
+  right: -5%;
+  width: 400px;
+  height: 400px;
+  background: rgba(201, 24, 255, 0.3);
+  border-radius: 50%;
+  filter: blur(180px);
+  animation: floatRight 18s ease-in-out infinite;
+}
+
+@keyframes floatLeft {
 
   0%,
   100% {
-    background-position: 0% 0%, 100% 100%, 50% 50%;
+    transform: translate(0, 0);
   }
 
   50% {
-    background-position: 100% 0%, 0% 100%, 50% 50%;
+    transform: translate(40px, 40px);
+  }
+}
+
+@keyframes floatRight {
+
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+
+  50% {
+    transform: translate(-40px, -25px);
+  }
+}
+
+/* Third pink glow blob */
+.glow-blob-pink {
+  position: absolute;
+  top: 40%;
+  left: 30%;
+  width: 300px;
+  height: 300px;
+  background: rgba(255, 77, 109, 0.2);
+  border-radius: 50%;
+  filter: blur(150px);
+  z-index: -1;
+  animation: floatCenter 20s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes floatCenter {
+
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate(25px, -15px) scale(1.08);
   }
 }
 
 /* ============================================
-   GRID BACKGROUND
+   GRID BACKGROUND (Subtle) - Not used on side panels
    ============================================ */
 
 .grid-bg {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: -2;
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-  background-size: 60px 60px;
+  display: none;
 }
 
 /* ============================================
-   GRAIN OVERLAY
+   GRAIN OVERLAY - Premium Texture
    ============================================ */
 
 body::before {
@@ -318,8 +556,24 @@ body::before {
   bottom: 0;
   z-index: 9999;
   pointer-events: none;
-  opacity: 0.03;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* ============================================
+   NAVBAR STYLING - Glass Strip (within main content)
+   ============================================ */
+
+.navbar-glass {
+  background: rgba(5, 5, 5, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.nav-link-active {
+  color: #ff7a18 !important;
 }
 
 /* ============================================
@@ -327,7 +581,7 @@ body::before {
    ============================================ */
 
 .mobile-menu {
-  background: rgba(20, 20, 22, 0.98);
+  background: rgba(11, 11, 15, 0.98);
   backdrop-filter: blur(20px);
   border-left: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -337,7 +591,7 @@ body::before {
    ============================================ */
 
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -346,11 +600,11 @@ body::before {
 
 ::-webkit-scrollbar-thumb {
   background: var(--color-background-tertiary);
-  border-radius: 4px;
+  border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-accent-cyan);
+  background: var(--color-accent-orange);
 }
 
 /* ============================================
@@ -358,6 +612,49 @@ body::before {
    ============================================ */
 
 ::selection {
-  background: rgba(6, 182, 212, 0.3);
+  background: rgba(255, 122, 24, 0.3);
   color: var(--color-text-primary);
+}
+
+/* ============================================
+   ACCENT COLOR UTILITIES
+   ============================================ */
+
+.text-accent-orange {
+  color: var(--color-accent-orange);
+}
+
+.text-accent-pink {
+  color: var(--color-accent-pink);
+}
+
+.text-accent-purple {
+  color: var(--color-accent-purple);
+}
+
+.bg-accent-orange {
+  background-color: var(--color-accent-orange);
+}
+
+.bg-accent-pink {
+  background-color: var(--color-accent-pink);
+}
+
+.bg-accent-purple {
+  background-color: var(--color-accent-purple);
+}
+
+/* ============================================
+   HOVER GLOW ANIMATION
+   ============================================ */
+
+.hover-glow {
+  transition: all 0.4s ease;
+}
+
+.hover-glow:hover {
+  transform: scale(1.02);
+  box-shadow:
+    0 0 20px rgba(255, 122, 24, 0.15),
+    0 0 30px rgba(201, 24, 255, 0.12);
 }

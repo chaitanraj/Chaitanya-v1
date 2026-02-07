@@ -1,17 +1,22 @@
 import { cn } from "@/lib/utils";
 
 const variants = {
-    default: "bg-accent-cyan/10 text-accent-cyan border border-accent-cyan/20",
-    purple: "bg-accent-purple/10 text-accent-purple border border-accent-purple/20",
-    pink: "bg-accent-pink/10 text-accent-pink border border-accent-pink/20",
-    outline: "bg-transparent text-text-secondary border border-white/10 hover:border-white/20",
+    // Orange skill badge (default)
+    default: "bg-[rgba(255,122,24,0.08)] text-[#ff9a3d] border border-[rgba(255,122,24,0.35)]",
+    // Pink variant
+    pink: "bg-[rgba(255,77,109,0.08)] text-[#ff4d6d] border border-[rgba(255,77,109,0.35)]",
+    // Purple variant
+    purple: "bg-[rgba(201,24,255,0.08)] text-[#c918ff] border border-[rgba(201,24,255,0.35)]",
+    // Outline variant
+    outline: "bg-transparent text-[rgba(255,255,255,0.7)] border border-white/10 hover:border-white/20",
 };
 
 export function Badge({ children, variant = "default", className, ...props }) {
     return (
         <span
             className={cn(
-                "inline-flex items-center px-3 py-1 rounded-full text-xs font-medium transition-colors",
+                "inline-flex items-center px-3 py-1 rounded-full text-xs font-medium transition-all duration-300",
+                "hover:shadow-[0_0_15px_rgba(255,122,24,0.2)]",
                 variants[variant],
                 className
             )}

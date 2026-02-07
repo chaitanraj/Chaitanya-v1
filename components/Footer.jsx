@@ -14,14 +14,14 @@ export default function Footer() {
                         initial={{ opacity: 0 }}
                         whileInView={{ opacity: 1 }}
                         transition={{ delay: 0.2 }}
-                        className="flex items-center gap-2 text-text-muted"
+                        className="flex items-center gap-2 text-[rgba(255,255,255,0.5)]"
                     >
                         <span>Made with</span>
                         <motion.div
                             animate={{ scale: [1, 1.2, 1] }}
                             transition={{ duration: 1, repeat: Infinity }}
                         >
-                            <Heart size={16} className="text-accent-pink fill-accent-pink" />
+                            <Heart size={16} className="text-[#ff4d6d] fill-[#ff4d6d]" />
                         </motion.div>
                         <span>by</span>
                         <span className="text-gradient font-semibold">{personalInfo.name}</span>
@@ -32,7 +32,7 @@ export default function Footer() {
                         initial={{ opacity: 0 }}
                         whileInView={{ opacity: 1 }}
                         transition={{ delay: 0.3 }}
-                        className="text-text-muted text-sm"
+                        className="text-[rgba(255,255,255,0.5)] text-sm"
                     >
                         © {new Date().getFullYear()} All rights reserved.
                     </motion.div>
