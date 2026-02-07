@@ -35,10 +35,14 @@ export default function RootLayout({ children }) {
         <div className="layout-wrapper">
           {/* Left Side Panel with Grid Pattern */}
           <div className="side-panel side-panel-left">
-            <div className="side-grid-pattern"></div>
+            <div className="side-grid-base"></div>
+            <div className="side-grid-lines-v"></div>
+            <div className="side-grid-lines-h"></div>
+            <div className="side-orb side-orb-1"></div>
+            <div className="side-orb side-orb-2"></div>
           </div>
 
-          {/* Main Content Area (60%) */}
+          {/* Main Content Area (50%) */}
           <div className="main-content-wrapper">
             {/* Background effects inside main content */}
             <div className="mesh-gradient" />
@@ -48,7 +52,11 @@ export default function RootLayout({ children }) {
 
           {/* Right Side Panel with Grid Pattern */}
           <div className="side-panel side-panel-right">
-            <div className="side-grid-pattern"></div>
+            <div className="side-grid-base"></div>
+            <div className="side-grid-lines-v"></div>
+            <div className="side-grid-lines-h"></div>
+            <div className="side-orb side-orb-3"></div>
+            <div className="side-orb side-orb-4"></div>
           </div>
         </div>
       </body>

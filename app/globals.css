@@ -89,65 +89,158 @@ body {
   top: 0;
   background: #020202;
   z-index: 10;
+  overflow: hidden;
 }
 
 .side-panel-left {
   left: 0;
-  border-right: 1px solid rgba(255, 255, 255, 0.03);
+  border-right: 1px solid rgba(255, 122, 24, 0.15);
 }
 
 .side-panel-right {
   right: 0;
-  border-left: 1px solid rgba(255, 255, 255, 0.03);
+  border-left: 1px solid rgba(201, 24, 255, 0.15);
 }
 
-/* Grid Pattern for Side Panels */
-.side-grid-pattern {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  overflow: hidden;
+/* Static Grid Base */
+.side-grid-base {
+  position: absolute;
+  inset: 0;
   background:
-    linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+    linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
   background-size: 40px 40px;
 }
 
-/* Dot Pattern Overlay */
-.side-grid-pattern::before {
-  content: '';
+/* Moving Vertical Lines */
+.side-grid-lines-v {
   position: absolute;
-  inset: 0;
-  background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-  background-size: 20px 20px;
-  background-position: 10px 10px;
-}
-
-/* Subtle gradient fade on inner edges */
-.side-panel-left .side-grid-pattern::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 60px;
-  height: 100%;
-  background: linear-gradient(to left, rgba(5, 5, 5, 0.9), transparent);
-}
-
-.side-panel-right .side-grid-pattern::after {
-  content: '';
-  position: absolute;
-  top: 0;
+  top: -100%;
   left: 0;
-  width: 60px;
-  height: 100%;
-  background: linear-gradient(to right, rgba(5, 5, 5, 0.9), transparent);
+  right: 0;
+  height: 300%;
+  background: repeating-linear-gradient(0deg,
+      transparent 0px,
+      transparent 80px,
+      rgba(255, 122, 24, 0.25) 80px,
+      rgba(255, 122, 24, 0.25) 82px);
+  animation: moveVertical 6s linear infinite;
 }
 
-/* Main Content Wrapper - 60% centered */
+/* Moving Horizontal Lines */
+.side-grid-lines-h {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 300%;
+  bottom: 0;
+  background: repeating-linear-gradient(90deg,
+      transparent 0px,
+      transparent 60px,
+      rgba(201, 24, 255, 0.20) 60px,
+      rgba(201, 24, 255, 0.20) 62px);
+  animation: moveHorizontal 10s linear infinite;
+}
+
+@keyframes moveVertical {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(80px);
+  }
+}
+
+@keyframes moveHorizontal {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(60px);
+  }
+}
+
+/* Glow Orbs */
+.side-orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.side-orb-1 {
+  top: 15%;
+  right: -20px;
+  width: 180px;
+  height: 180px;
+  background: rgba(255, 122, 24, 0.35);
+  filter: blur(80px);
+  animation: floatOrb1 10s ease-in-out infinite;
+}
+
+.side-orb-2 {
+  bottom: 20%;
+  right: 10px;
+  width: 140px;
+  height: 140px;
+  background: rgba(255, 77, 109, 0.30);
+  filter: blur(70px);
+  animation: floatOrb2 14s ease-in-out infinite;
+}
+
+.side-orb-3 {
+  top: 30%;
+  left: -20px;
+  width: 180px;
+  height: 180px;
+  background: rgba(201, 24, 255, 0.35);
+  filter: blur(80px);
+  animation: floatOrb1 12s ease-in-out infinite reverse;
+}
+
+.side-orb-4 {
+  bottom: 25%;
+  left: 10px;
+  width: 140px;
+  height: 140px;
+  background: rgba(255, 77, 109, 0.30);
+  filter: blur(70px);
+  animation: floatOrb2 16s ease-in-out infinite reverse;
+}
+
+@keyframes floatOrb1 {
+
+  0%,
+  100% {
+    transform: translateY(0) translateX(0);
+    opacity: 0.9;
+  }
+
+  50% {
+    transform: translateY(-50px) translateX(30px);
+    opacity: 1;
+  }
+}
+
+@keyframes floatOrb2 {
+
+  0%,
+  100% {
+    transform: translateY(0) translateX(0);
+    opacity: 0.8;
+  }
+
+  50% {
+    transform: translateY(40px) translateX(-25px);
+    opacity: 1;
+  }
+}
+
+/* Main Content Wrapper - 50% centered */
 .main-content-wrapper {
-  width: 60%;
-  margin-left: 20%;
+  width: 50%;
+  margin-left: 25%;
   min-height: 100vh;
   position: relative;
   background: var(--color-background);
@@ -156,6 +249,31 @@ body {
   box-shadow:
     -20px 0 60px rgba(0, 0, 0, 0.5),
     20px 0 60px rgba(0, 0, 0, 0.5);
+}
+
+/* Gradient edge glows that flow from side panels */
+.main-content-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 80px;
+  height: 100%;
+  background: linear-gradient(to right, rgba(255, 122, 24, 0.04), transparent);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.main-content-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 80px;
+  height: 100%;
+  background: linear-gradient(to left, rgba(201, 24, 255, 0.04), transparent);
+  pointer-events: none;
+  z-index: 1;
 }
 
 /* Mobile: Full width, no side panels */
