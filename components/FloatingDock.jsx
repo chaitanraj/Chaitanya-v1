@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import {
     Home,
     Briefcase,
@@ -26,11 +26,23 @@ const socialLinks = [
     { name: "LinkedIn", href: "https://www.linkedin.com/in/chaitanya-raj-93033528b/", icon: Linkedin, external: true },
 ];
 
+const subscribe = (callback) => {
+    if (typeof window === "undefined") return () => {};
+    const frameId = window.requestAnimationFrame(callback);
+    return () => window.cancelAnimationFrame(frameId);
+};
+const getClientSnapshot = () => true;
+const getServerSnapshot = () => false;
+
 export default function FloatingDock() {
     const [active, setActive] = useState("#home");
     const { isDark, toggleTheme } = useTheme();
+    const isHydrated = useSyncExternalStore(subscribe, getClientSnapshot, getServerSnapshot);
+    const resolvedIsDark = isHydrated ? isDark : true;
 
     useEffect(() => {
+        if (!isHydrated) return;
+
         const sections = navLinks
             .filter((l) => l.href.startsWith("#"))
             .map((l) => document.querySelector(l.href))
@@ -48,7 +60,7 @@ export default function FloatingDock() {
         sections.forEach((section) => observer.observe(section));
 
         return () => observer.disconnect();
-    }, []);
+    }, [isHydrated]);
 
     const renderLink = (item) => {
         const Icon = item.icon;
@@ -90,7 +102,7 @@ export default function FloatingDock() {
     };
 
     return (
-        <div className="fixed bottom-3 sm:bottom-6 left-1/2 -translate-x-1/2 z-50 max-w-[calc(100vw-20px)]">
+        <div className="fixed bottom-[calc(0.75rem+env(safe-area-inset-bottom))] sm:bottom-6 left-1/2 -translate-x-1/2 z-50 max-w-[calc(100vw-20px)]">
             <div
                 className="
           group flex items-center gap-0.5 sm:gap-1 px-2.5 sm:px-4 py-1.5 sm:py-2.5
@@ -115,7 +127,7 @@ export default function FloatingDock() {
                     className="group/icon relative flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 rounded-full text-[color:var(--color-text-muted)] hover:text-[color:var(--color-text-primary)] hover:bg-[var(--color-glass-bg)] hover:shadow-[0_0_25px_rgba(255,122,24,0.18)] hover:mx-2 transition-all duration-200 cursor-pointer"
                     aria-label="Toggle Theme"
                 >
-                    {isDark ? (
+                    {resolvedIsDark ? (
                         <Sun size={13} className="transition-transform duration-200 group-hover/icon:scale-110 sm:h-[15px] sm:w-[15px]" />
                     ) : (
                         <Moon size={13} className="transition-transform duration-200 group-hover/icon:scale-110 sm:h-[15px] sm:w-[15px]" />
@@ -130,7 +142,7 @@ export default function FloatingDock() {
             "
                     >
                         <span className="group-hover/icon:bg-gradient-to-r group-hover/icon:from-orange-400 group-hover/icon:via-pink-500 group-hover/icon:to-purple-500 group-hover/icon:bg-clip-text group-hover/icon:text-transparent">
-                            {isDark ? "Light" : "Dark"}
+                            {resolvedIsDark ? "Light" : "Dark"}
                         </span>
                     </span>
                 </button>
