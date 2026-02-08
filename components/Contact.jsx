@@ -48,7 +48,7 @@ export default function Contact() {
 
 
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0.8, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ delay: 0.3 }}
             className="text-xs sm:text-sm theme-text-muted mb-7 sm:mb-10"

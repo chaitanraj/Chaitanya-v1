@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { motion, useInView, useReducedMotion } from "framer-motion";
 import { ExternalLink, Github, ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
@@ -247,27 +247,53 @@ export default function Projects() {
 
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
-  const scrollAmount = useMemo(() => {
-    if (typeof window === "undefined") return 360;
-    if (window.innerWidth < 640) return 278;
-    if (window.innerWidth < 1024) return 330;
-    return 420;
+  const getCards = useCallback(() => {
+    if (!scrollRef.current) return [];
+    return Array.from(scrollRef.current.querySelectorAll(".scroll-card"));
   }, []);
 
-  const scrollByAmount = useCallback((delta) => {
-    if (!scrollRef.current) return;
-    scrollRef.current.scrollBy({ left: delta, behavior: "smooth" });
-  }, []);
+  const getNearestCardIndex = useCallback(() => {
+    const container = scrollRef.current;
+    const cards = getCards();
 
-  const scrollLeft = useCallback(
-    () => scrollByAmount(-scrollAmount),
-    [scrollByAmount, scrollAmount]
+    if (!container || cards.length === 0) return 0;
+
+    let nearestIndex = 0;
+    let minDistance = Number.POSITIVE_INFINITY;
+
+    cards.forEach((card, index) => {
+      const distance = Math.abs(card.offsetLeft - container.scrollLeft);
+      if (distance < minDistance) {
+        minDistance = distance;
+        nearestIndex = index;
+      }
+    });
+
+    return nearestIndex;
+  }, [getCards]);
+
+  const scrollToCard = useCallback(
+    (index) => {
+      const container = scrollRef.current;
+      const cards = getCards();
+
+      if (!container || cards.length === 0) return;
+
+      const boundedIndex = Math.max(0, Math.min(index, cards.length - 1));
+      container.scrollTo({ left: cards[boundedIndex].offsetLeft, behavior: "smooth" });
+    },
+    [getCards]
   );
 
-  const scrollRight = useCallback(
-    () => scrollByAmount(scrollAmount),
-    [scrollByAmount, scrollAmount]
-  );
+  const scrollLeft = useCallback(() => {
+    const currentIndex = getNearestCardIndex();
+    scrollToCard(currentIndex - 1);
+  }, [getNearestCardIndex, scrollToCard]);
+
+  const scrollRight = useCallback(() => {
+    const currentIndex = getNearestCardIndex();
+    scrollToCard(currentIndex + 1);
+  }, [getNearestCardIndex, scrollToCard]);
 
   const handleProjectClick = (project) => {
     setSelectedProject(project);
@@ -297,17 +323,21 @@ export default function Projects() {
             </motion.h2>
 
             {/* Navigation Arrows */}
-            <div className="hidden md:flex gap-2">
+            <div className="flex gap-2">
               <button
+                type="button"
                 onClick={scrollLeft}
                 className="p-2 rounded-xl glass-card hover:border-[#ff7a18]/50 transition-all"
+                aria-label="Scroll projects left"
               >
                 <ChevronLeft size={18} className="theme-text-secondary" />
               </button>
 
               <button
+                type="button"
                 onClick={scrollRight}
                 className="p-2 rounded-xl glass-card hover:border-[#ff7a18]/50 transition-all"
+                aria-label="Scroll projects right"
               >
                 <ChevronRight size={18} className="theme-text-secondary" />
               </button>
@@ -335,9 +365,13 @@ export default function Projects() {
 
           {/* Scroll Hint - Mobile */}
           <div className="flex md:hidden justify-center mt-4">
-            <span className="text-[11px] theme-text-muted">
-              ← Swipe to explore →
+            <span className="flex items-center gap-2 text-xs sm:text-sm theme-text-muted">
+
+              <ChevronLeft size={16} className="opacity-60" />
+              Browse projects
+              <ChevronRight size={16} className="opacity-60" />
             </span>
+
           </div>
         </motion.div>
       </div>
