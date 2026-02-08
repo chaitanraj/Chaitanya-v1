@@ -378,8 +378,8 @@ export default function Projects() {
           </div>
 
           {/* Scroll Hint - Mobile */}
-          <div className="flex md:hidden justify-center">
-            <span className="flex items-center gap-2 text-md sm:text-sm theme-text-muted">
+          <div className="flex justify-center mt-4">
+            <span className="flex items-center gap-2 text-xs sm:text-sm theme-text-muted">
 
               {/* <ChevronLeft size={16} className="opacity-60" /> */}
               Swipe to Browse projects
