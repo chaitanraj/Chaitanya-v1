@@ -3,6 +3,7 @@ import "./globals.css";
 import SideGrid from "@/components/SideGrid";
 import PipesBackground from "@/components/PipesBackground";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { icons } from "lucide-react";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-heading",
@@ -26,6 +27,9 @@ export const metadata = {
     description: "Full Stack Developer specializing in MERN, PERN, and AI/ML.",
     type: "website",
   },
+  icons:{
+    icon:"/favicon.png"
+  }
 };
 
 export default function RootLayout({ children }) {
@@ -42,10 +46,11 @@ export default function RootLayout({ children }) {
 
             {/* Main Content Area (50%) */}
             <div className="main-content-wrapper">
-              {/* <PipesBackground /> */}
+              <PipesBackground />
               <div className="mesh-gradient" />
               <div className="glow-blob-pink" />
-              {children}
+              <div className="main-content-noise-shield" />
+              <div className="main-content-inner">{children}</div>
             </div>
           </div>
         </ThemeProvider>

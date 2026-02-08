@@ -13,7 +13,7 @@ const Button = forwardRef(({
 }, ref) => {
     const variants = {
         // Primary CTA button with orange → pink → purple gradient
-        primary: "bg-gradient-to-r from-[#ff7a18] via-[#ff4d6d] to-[#c918ff] text-white hover:shadow-[0_0_25px_rgba(255,77,109,0.35)] hover:-translate-y-0.5",
+        primary: "bg-gradient-to-r from-[#ff7a18] via-[#ff4d6d] to-[#c918ff] text-white shadow-[0_10px_24px_rgba(255,122,24,0.16)] hover:shadow-[0_14px_32px_rgba(255,77,109,0.2)] hover:-translate-y-0.5",
         // Secondary glass button
         secondary: "bg-[var(--color-glass-bg)] theme-text-primary border border-[var(--color-glass-border)] hover:bg-[var(--color-glass-bg-strong)] hover:border-[#ff7a18]/50 hover:shadow-[0_0_20px_rgba(255,122,24,0.1)]",
         ghost: "theme-text-secondary hover:theme-text-primary hover:bg-[var(--color-glass-bg)]",

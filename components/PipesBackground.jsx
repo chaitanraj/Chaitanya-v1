@@ -49,7 +49,7 @@ class Pipe {
         this.color = COLORS[Math.floor(Math.random() * COLORS.length)];
         this.segments = [{ x: this.x, y: this.y }];
         this.maxSegments = 25 + Math.floor(Math.random() * 20);
-        this.speed = 1.2 + Math.random() * 0.6; // Faster speed
+        this.speed = 1.5 + Math.random() * 0.8; // Slightly faster overall motion
         this.opacity = 0;
         this.fadeIn = true;
         this.fadeOut = false;
@@ -75,8 +75,8 @@ class Pipe {
         const dx = [0, 1, 0, -1][this.direction] * this.speed;
         const dy = [-1, 0, 1, 0][this.direction] * this.speed;
 
-        this.x += dx * this.gridSize * 0.08;
-        this.y += dy * this.gridSize * 0.08;
+        this.x += dx * this.gridSize * 0.1;
+        this.y += dy * this.gridSize * 0.1;
 
         // Add segment at grid points
         const lastSeg = this.segments[this.segments.length - 1];
@@ -109,7 +109,7 @@ class Pipe {
         }
 
         // Update flow animation - faster
-        this.flowOffset += 1.2;
+        this.flowOffset += 1.5;
     }
 
     draw(ctx, centerX, centerY) {
@@ -290,10 +290,9 @@ export default function PipesBackground() {
     return (
         <canvas
             ref={canvasRef}
-            className="absolute inset-0 w-full h-full pointer-events-none"
+            className="pipes-canvas absolute inset-0 w-full h-full pointer-events-none"
             style={{
                 zIndex: 1,
-                opacity: 1.0,
             }}
         />
     );

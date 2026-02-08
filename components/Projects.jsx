@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { motion, useInView, useReducedMotion } from "framer-motion";
 import { ExternalLink, Github, ChevronLeft, ChevronRight } from "lucide-react";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -16,34 +17,32 @@ import { projects } from "@/lib/data";
 import { cn } from "@/lib/utils";
 
 // Project Card Component
-function ProjectCard({ project, index, onClick }) {
-  const [isHovered, setIsHovered] = useState(false);
-
+function ProjectCard({ project, index, onClick, reduceMotion }) {
+  const cardHoverAnimation = reduceMotion ? undefined : { scale: 1.01, y: -2 };
   return (
     <motion.div
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.08 }}
-      viewport={{ once: true }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      transition={{ delay: index * 0.08, duration: 0.45, ease: "easeOut" }}
+      viewport={{ once: true, amount: 0.2 }}
       onClick={onClick}
       className={cn(
         "scroll-card flex-shrink-0",
         "w-[300px] sm:w-[360px] lg:w-[420px]",
         "glass-card overflow-hidden cursor-pointer group rounded-2xl"
       )}
-      whileHover={{ scale: 1.02 }}
+      whileHover={cardHoverAnimation}
     >
       {/* Project Cover Image */}
       <div className="relative h-48 sm:h-52 lg:h-56 overflow-hidden">
         {project.image ? (
-          <motion.img
+          <Image
             src={project.image}
             alt={project.title}
-            animate={isHovered ? { scale: 1.06 } : { scale: 1 }}
-            transition={{ duration: 0.5 }}
-            className="absolute inset-0 w-full h-full object-cover"
+            fill
+            sizes="(max-width: 640px) 300px, (max-width: 1024px) 360px, 420px"
+            draggable={false}
+            className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04] will-change-transform"
           />
         ) : (
           <>
@@ -53,11 +52,7 @@ function ProjectCard({ project, index, onClick }) {
                 "bg-gradient-to-br from-[#ff7a18]/20 via-[#ff4d6d]/20 to-[#c918ff]/10"
               )}
             />
-            <motion.div
-              animate={isHovered ? { scale: 1.06 } : { scale: 1 }}
-              transition={{ duration: 0.5 }}
-              className="absolute inset-0 bg-gradient-to-br from-[#ff7a18]/30 to-[#c918ff]/30 opacity-50"
-            />
+            <div className="absolute inset-0 bg-gradient-to-br from-[#ff7a18]/30 to-[#c918ff]/30 opacity-50 transition-transform duration-500 ease-out group-hover:scale-[1.04] will-change-transform" />
             <div className="absolute inset-0 flex items-center justify-center">
               <span className="text-4xl font-bold heading-font text-[color:var(--color-text-muted)] opacity-30">
                 {project.title.substring(0, 2)}
@@ -67,11 +62,7 @@ function ProjectCard({ project, index, onClick }) {
         )}
 
         {/* Glow overlay on hover */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: isHovered ? 1 : 0 }}
-          className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"
-        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
       </div>
 
       {/* Card Content */}
@@ -221,28 +212,49 @@ function ProjectModal({ project, open, onOpenChange }) {
 export default function Projects() {
   const [selectedProject, setSelectedProject] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
+  const shouldReduceMotion = useReducedMotion();
 
   const scrollRef = useRef(null);
   const sectionRef = useRef(null);
 
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
-  const scrollLeft = () => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollBy({ left: -380, behavior: "smooth" });
-    }
-  };
+  const scrollAmount = useMemo(() => {
+    if (typeof window === "undefined") return 360;
+    if (window.innerWidth < 640) return 300;
+    if (window.innerWidth < 1024) return 340;
+    return 420;
+  }, []);
 
-  const scrollRight = () => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollBy({ left: 380, behavior: "smooth" });
-    }
-  };
+  const scrollByAmount = useCallback((delta) => {
+    if (!scrollRef.current) return;
+    scrollRef.current.scrollBy({ left: delta, behavior: "smooth" });
+  }, []);
+
+  const scrollLeft = useCallback(() => scrollByAmount(-scrollAmount), [scrollByAmount, scrollAmount]);
+  const scrollRight = useCallback(() => scrollByAmount(scrollAmount), [scrollByAmount, scrollAmount]);
 
   const handleProjectClick = (project) => {
     setSelectedProject(project);
     setModalOpen(true);
   };
+
+  useEffect(() => {
+    const container = scrollRef.current;
+    if (!container) return;
+
+    const isFinePointer = window.matchMedia("(pointer: fine)").matches;
+    if (!isFinePointer) return;
+
+    const onWheel = (event) => {
+      if (Math.abs(event.deltaY) <= Math.abs(event.deltaX)) return;
+      event.preventDefault();
+      container.scrollBy({ left: event.deltaY, behavior: "auto" });
+    };
+
+    container.addEventListener("wheel", onWheel, { passive: false });
+    return () => container.removeEventListener("wheel", onWheel);
+  }, []);
 
   return (
     <section id="projects" className="relative overflow-hidden">
@@ -251,7 +263,7 @@ export default function Projects() {
           ref={sectionRef}
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
         >
           {/* Section Header */}
           <div className="flex items-center justify-between mb-8">
@@ -290,6 +302,7 @@ export default function Projects() {
                   key={project.title}
                   project={project}
                   index={index}
+                  reduceMotion={shouldReduceMotion}
                   onClick={() => handleProjectClick(project)}
                 />
               ))}
