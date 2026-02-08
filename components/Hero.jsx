@@ -153,7 +153,7 @@ export default function Hero() {
                 },
                 {
                   icon: Linkedin,
-                  href: personalInfo.linkedinUrl,
+                  href: `https://www.linkedin.com/in/chaitanya-raj-93033528b/`,
                   label: "LinkedIn",
                 },
                 {

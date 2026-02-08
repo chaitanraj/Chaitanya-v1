@@ -35,7 +35,7 @@ export default function FloatingDock() {
             .filter((l) => l.href.startsWith("#"))
             .map((l) => document.querySelector(l.href))
             .filter(Boolean);
-
+            
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach((entry) => {
