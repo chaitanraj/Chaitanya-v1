@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import PortfolioPreloader from "@/components/PortfolioPreloader";
 
-const MIN_PRELOADER_MS = 500;
+const MIN_PRELOADER_MS = 600;
 const PRELOADER_FADE_MS = 420;
 
 export default function InitialLoadGate({ children }) {

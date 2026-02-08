@@ -1086,40 +1086,60 @@ body::before {
 
 /* Mobile Optimization */
 @media (max-width: 640px) {
+  html {
+    font-size: 15px;
+  }
+
   html,
   body {
     overflow-x: hidden;
   }
 
   .section-container {
-    padding: 34px 14px;
+    padding: 30px 12px;
+  }
+
+  .text-display {
+    font-size: clamp(1.82rem, 7.4vw, 2.6rem);
+  }
+
+  .text-heading {
+    font-size: clamp(1.32rem, 5.2vw, 1.95rem);
+  }
+
+  .text-subheading {
+    font-size: clamp(0.9rem, 3.8vw, 1.02rem);
   }
 
   .glass-card {
-    border-radius: 16px;
+    border-radius: 14px;
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
   }
 
   .horizontal-scroll-container {
-    gap: 14px;
-    padding: 12px 0;
+    gap: 12px;
+    padding: 10px 0;
     overflow-x: hidden;
     overscroll-behavior-x: none;
     touch-action: pan-y;
   }
 
+  .terminal {
+    border-radius: 12px;
+  }
+
   .terminal-header {
-    padding: 8px 12px;
+    padding: 7px 10px;
   }
 
   .terminal-dot {
-    width: 8px;
-    height: 8px;
+    width: 7px;
+    height: 7px;
   }
 
   .cursor-blink {
-    height: 14px;
+    height: 13px;
   }
 }
 
@@ -1138,19 +1158,19 @@ body::before {
 /* Extra small phones */
 @media (max-width: 400px) {
   .section-container {
-    padding: 28px 12px;
+    padding: 24px 11px;
   }
 
   .text-display {
-    font-size: 2rem;
+    font-size: 1.85rem;
   }
 
   .text-heading {
-    font-size: 1.6rem;
+    font-size: 1.45rem;
   }
 
   .text-subheading {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
   }
 }
 

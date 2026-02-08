@@ -72,14 +72,14 @@ export default function FloatingDock() {
                 href={item.href}
                 target={item.external ? "_blank" : "_self"}
                 rel={item.external ? "noreferrer" : undefined}
-                className={`group/icon relative flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 rounded-full transition-all duration-200
+                className={`group/icon relative flex items-center justify-center w-[30px] h-[30px] sm:w-9 sm:h-9 rounded-full transition-all duration-200
                 ${isActive
                         ? "bg-gradient-to-r from-orange-400 via-pink-500 to-purple-500 text-white shadow-[0_0_30px_rgba(255,77,109,0.45)]"
                         : "text-[color:var(--color-text-muted)] hover:text-[color:var(--color-text-primary)] hover:bg-[var(--color-glass-bg)] hover:shadow-[0_0_25px_rgba(255,122,24,0.18)] hover:mx-2"
                     }`}
             >
                 <Icon
-                    size={13}
+                    size={12}
                     className="transition-transform duration-200 group-hover/icon:scale-110 sm:h-[15px] sm:w-[15px]"
                 />
 
@@ -105,7 +105,7 @@ export default function FloatingDock() {
         <div className="fixed bottom-[calc(0.75rem+env(safe-area-inset-bottom))] sm:bottom-6 left-1/2 -translate-x-1/2 z-50 max-w-[calc(100vw-20px)]">
             <div
                 className="
-          group flex items-center gap-0.5 sm:gap-1 px-2.5 sm:px-4 py-1.5 sm:py-2.5
+          group flex items-center gap-[2px] sm:gap-1 px-2 sm:px-4 py-[5px] sm:py-2.5
           rounded-full bg-[var(--color-glass-bg)] border border-[var(--color-glass-border)] backdrop-blur-xl
           shadow-xl shadow-[var(--color-shadow-card)]
           transition-all duration-300
@@ -115,22 +115,22 @@ export default function FloatingDock() {
                 {navLinks.map(renderLink)}
 
                 {/* Separator */}
-                <div className="w-px h-4 sm:h-5 bg-[var(--color-divider)] mx-0.5 sm:mx-1" />
+                <div className="w-px h-[14px] sm:h-5 bg-[var(--color-divider)] mx-0.5 sm:mx-1" />
 
                 {/* Social Links */}
                 {socialLinks.map(renderLink)}
 
                 {/* Theme Toggle Icon */}
-                <div className="w-px h-4 sm:h-5 bg-[var(--color-divider)] mx-0.5 sm:mx-1" />
+                <div className="w-px h-[14px] sm:h-5 bg-[var(--color-divider)] mx-0.5 sm:mx-1" />
                 <button
                     onClick={toggleTheme}
-                    className="group/icon relative flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 rounded-full text-[color:var(--color-text-muted)] hover:text-[color:var(--color-text-primary)] hover:bg-[var(--color-glass-bg)] hover:shadow-[0_0_25px_rgba(255,122,24,0.18)] hover:mx-2 transition-all duration-200 cursor-pointer"
+                    className="group/icon relative flex items-center justify-center w-[30px] h-[30px] sm:w-9 sm:h-9 rounded-full text-[color:var(--color-text-muted)] hover:text-[color:var(--color-text-primary)] hover:bg-[var(--color-glass-bg)] hover:shadow-[0_0_25px_rgba(255,122,24,0.18)] hover:mx-2 transition-all duration-200 cursor-pointer"
                     aria-label="Toggle Theme"
                 >
                     {resolvedIsDark ? (
-                        <Sun size={13} className="transition-transform duration-200 group-hover/icon:scale-110 sm:h-[15px] sm:w-[15px]" />
+                        <Sun size={12} className="transition-transform duration-200 group-hover/icon:scale-110 sm:h-[15px] sm:w-[15px]" />
                     ) : (
-                        <Moon size={13} className="transition-transform duration-200 group-hover/icon:scale-110 sm:h-[15px] sm:w-[15px]" />
+                        <Moon size={12} className="transition-transform duration-200 group-hover/icon:scale-110 sm:h-[15px] sm:w-[15px]" />
                     )}
                     <span
                         className="

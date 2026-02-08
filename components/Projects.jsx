@@ -29,14 +29,14 @@ function ProjectCard({ project, index, onClick, reduceMotion }) {
       onClick={onClick}
       className={cn(
         "scroll-card flex-shrink-0 flex flex-col",
-        "w-[264px] sm:w-[340px] lg:w-[420px]",
-        "h-[420px] sm:h-[500px] lg:h-[540px]",
+        "w-[248px] sm:w-[340px] lg:w-[420px]",
+        "h-[396px] sm:h-[500px] lg:h-[540px]",
         "glass-card overflow-hidden cursor-pointer group rounded-2xl"
       )}
       whileHover={cardHoverAnimation}
     >
       {/* Project Cover Image */}
-      <div className="relative h-40 sm:h-52 lg:h-56 overflow-hidden">
+      <div className="relative h-36 sm:h-52 lg:h-56 overflow-hidden">
         {project.image ? (
           <Image
             src={project.image}
@@ -68,22 +68,22 @@ function ProjectCard({ project, index, onClick, reduceMotion }) {
       </div>
 
       {/* Card Content */}
-      <div className="p-4 sm:p-5 flex flex-1 flex-col min-h-0">
-        <h3 className="text-base sm:text-lg font-bold heading-font theme-text-primary mb-2 group-hover:text-[#ff7a18] transition-colors">
+      <div className="p-3 sm:p-5 flex flex-1 flex-col min-h-0">
+        <h3 className="text-[15px] sm:text-lg font-bold heading-font theme-text-primary mb-1.5 sm:mb-2 group-hover:text-[#ff7a18] transition-colors">
           {project.title}
         </h3>
 
-        <p className="theme-text-secondary text-xs sm:text-sm leading-relaxed line-clamp-3 mb-4">
+        <p className="theme-text-secondary text-[11px] sm:text-sm leading-relaxed line-clamp-3 mb-3.5 sm:mb-4">
           {project.description}
         </p>
 
         {/* Tech Stack Badges */}
-        <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-4 sm:mb-5 min-h-[52px] sm:min-h-[56px] content-start">
+        <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-3.5 sm:mb-5 min-h-[48px] sm:min-h-[56px] content-start">
           {project.tech.slice(0, 3).map((tech) => (
             <Badge
               key={tech}
               variant="default"
-              className="text-[10px] sm:text-[11px] px-2.5 sm:px-3 py-1 rounded-full"
+              className="text-[9px] sm:text-[11px] px-2 sm:px-3 py-0.5 sm:py-1 rounded-full"
             >
               {tech}
             </Badge>
@@ -92,7 +92,7 @@ function ProjectCard({ project, index, onClick, reduceMotion }) {
           {project.tech.length > 3 && (
             <Badge
               variant="outline"
-              className="text-[10px] sm:text-[11px] px-2.5 sm:px-3 py-1 rounded-full"
+              className="text-[9px] sm:text-[11px] px-2 sm:px-3 py-0.5 sm:py-1 rounded-full"
             >
               +{project.tech.length - 3}
             </Badge>
@@ -100,12 +100,12 @@ function ProjectCard({ project, index, onClick, reduceMotion }) {
         </div>
 
         {/* Action Buttons */}
-        <div className="flex gap-2.5 sm:gap-3 mt-auto">
+        <div className="flex gap-2 sm:gap-3 mt-auto">
           {/* Code */}
           <Button
             variant="secondary"
             size="sm"
-            className="flex-1 text-xs sm:text-sm py-2.5 sm:py-3 rounded-xl"
+            className="flex-1 text-[11px] sm:text-sm py-2 sm:py-3 rounded-xl"
             asChild
           >
             <a
@@ -124,7 +124,7 @@ function ProjectCard({ project, index, onClick, reduceMotion }) {
             variant="primary"
             size="sm"
             className={cn(
-              "flex-1 text-xs sm:text-sm py-2.5 sm:py-3 rounded-xl",
+              "flex-1 text-[11px] sm:text-sm py-2 sm:py-3 rounded-xl",
               !project.live && "opacity-50 cursor-not-allowed"
             )}
             asChild={!!project.live}
@@ -323,7 +323,7 @@ export default function Projects() {
           transition={{ duration: 0.5, ease: "easeOut" }}
         >
           {/* Section Header */}
-          <div className="flex items-center justify-between mb-6 sm:mb-8">
+          <div className="flex items-center justify-between mb-5 sm:mb-8">
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
@@ -338,19 +338,19 @@ export default function Projects() {
               <button
                 type="button"
                 onClick={scrollLeft}
-                className="p-2 rounded-xl cursor-pointer glass-card hover:border-[#ff7a18]/50 transition-all"
+                className="p-1.5 sm:p-2 rounded-xl cursor-pointer glass-card hover:border-[#ff7a18]/50 transition-all"
                 aria-label="Scroll projects left"
               >
-                <ChevronLeft size={18} className="theme-text-secondary" />
+                <ChevronLeft size={16} className="theme-text-secondary sm:h-[18px] sm:w-[18px]" />
               </button>
 
               <button
                 type="button"
                 onClick={scrollRight}
-                className="p-2 rounded-xl cursor-pointer glass-card hover:border-[#ff7a18]/50 transition-all"
+                className="p-1.5 sm:p-2 rounded-xl cursor-pointer glass-card hover:border-[#ff7a18]/50 transition-all"
                 aria-label="Scroll projects right"
               >
-                <ChevronRight size={18} className="theme-text-secondary" />
+                <ChevronRight size={16} className="theme-text-secondary sm:h-[18px] sm:w-[18px]" />
               </button>
             </div>
           </div>
@@ -359,7 +359,7 @@ export default function Projects() {
           <div className="relative">
             <div
               ref={scrollRef}
-              className="horizontal-scroll-container pb-3 sm:pb-5 px-[calc(50%_-_132px)] sm:px-[calc(50%_-_170px)] lg:px-[calc(50%_-_210px)]"
+              className="horizontal-scroll-container pb-3 sm:pb-5 px-[calc(50%_-_124px)] sm:px-[calc(50%_-_170px)] lg:px-[calc(50%_-_210px)]"
             >
               {projects.map((project, index) => (
                 <ProjectCard
