@@ -11,7 +11,8 @@ function resolveInitialTheme() {
   const savedTheme = window.localStorage.getItem(THEME_STORAGE_KEY);
   if (savedTheme === "dark" || savedTheme === "light") return savedTheme;
 
-  return window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+  // Default to dark mode
+  return "dark";
 }
 
 function applyTheme(theme) {

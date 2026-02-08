@@ -63,7 +63,7 @@ export default function FloatingDock() {
                 className={`group/icon relative flex items-center justify-center w-9 h-9 rounded-full transition-all duration-200
                 ${isActive
                         ? "bg-gradient-to-r from-orange-400 via-pink-500 to-purple-500 text-white shadow-[0_0_30px_rgba(255,77,109,0.45)]"
-                        : "text-[color:var(--color-text-muted)] hover:text-[color:var(--color-text-primary)] hover:bg-[var(--color-glass-bg)] hover:shadow-[0_0_25px_rgba(255,122,24,0.18)]"
+                        : "text-[color:var(--color-text-muted)] hover:text-[color:var(--color-text-primary)] hover:bg-[var(--color-glass-bg)] hover:shadow-[0_0_25px_rgba(255,122,24,0.18)] hover:mx-2"
                     }`}
             >
                 <Icon
@@ -93,11 +93,10 @@ export default function FloatingDock() {
         <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
             <div
                 className="
-          group flex items-center gap-2 px-4 py-2.5
+          group flex items-center gap-1 px-4 py-2.5
           rounded-full bg-[var(--color-glass-bg)] border border-[var(--color-glass-border)] backdrop-blur-xl
           shadow-xl shadow-[var(--color-shadow-card)]
           transition-all duration-300
-          hover:px-6 hover:py-3.5 hover:gap-3 hover:scale-[1.03]
         "
             >
                 {/* Navigation Links */}
@@ -113,7 +112,7 @@ export default function FloatingDock() {
                 <div className="w-px h-5 bg-[var(--color-divider)] mx-1" />
                 <button
                     onClick={toggleTheme}
-                    className="group/icon relative flex items-center justify-center w-9 h-9 rounded-full text-[color:var(--color-text-muted)] hover:text-[color:var(--color-text-primary)] hover:bg-[var(--color-glass-bg)] hover:shadow-[0_0_25px_rgba(255,122,24,0.18)] transition-all duration-200 cursor-pointer"
+                    className="group/icon relative flex items-center justify-center w-9 h-9 rounded-full text-[color:var(--color-text-muted)] hover:text-[color:var(--color-text-primary)] hover:bg-[var(--color-glass-bg)] hover:shadow-[0_0_25px_rgba(255,122,24,0.18)] hover:mx-2 transition-all duration-200 cursor-pointer"
                     aria-label="Toggle Theme"
                 >
                     {isDark ? (
