@@ -26,7 +26,7 @@ function SpotlightText({ text, containerClassName = "", textClassName = "" }) {
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* Base Layer - Grey */}
-      <p className={`text-text-secondary leading-relaxed whitespace-pre-line ${textClassName}`}>
+      <p className={`theme-text-secondary leading-relaxed whitespace-pre-line ${textClassName}`}>
         {text}
       </p>
 
@@ -105,7 +105,7 @@ export default function About() {
               transition={{ delay: 0.25 }}
               className="glass-card p-8"
             >
-              <h3 className="text-xl font-semibold text-text-primary mb-6">
+              <h3 className="text-xl font-semibold theme-text-primary mb-6">
                 Quick Snapshot
               </h3>
 
@@ -114,7 +114,7 @@ export default function About() {
                 <div className="flex items-start gap-3">
                   <Code2 className="text-orange-400 mt-1 shrink-0" size={18} />
                   <div className="w-full">
-                    <p className="font-semibold text-text-primary">Full Stack Developer</p>
+                    <p className="font-semibold theme-text-primary">Full Stack Developer</p>
                     <SpotlightText
                       text="MERN • PERN • AI/ML"
                       textClassName="text-sm"
@@ -127,7 +127,7 @@ export default function About() {
                 <div className="flex items-start gap-3">
                   <Cpu className="text-pink-500 mt-1 shrink-0" size={18} />
                   <div className="w-full">
-                    <p className="font-semibold text-text-primary">Focus</p>
+                    <p className="font-semibold theme-text-primary">Focus</p>
                     <SpotlightText
                       text="Scalable APIs, system design, performance"
                       textClassName="text-sm"
@@ -140,7 +140,7 @@ export default function About() {
                 <div className="flex items-start gap-3">
                   <Rocket className="text-purple-400 mt-1 shrink-0" size={18} />
                   <div className="w-full">
-                    <p className="font-semibold text-text-primary">Currently Building</p>
+                    <p className="font-semibold theme-text-primary">Currently Building</p>
                     <SpotlightText
                       text="Real-world apps + AI-integrated products"
                       textClassName="text-sm"
@@ -156,3 +156,4 @@ export default function About() {
     </section>
   );
 }
+

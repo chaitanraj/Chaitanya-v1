@@ -105,7 +105,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-lg md:text-xl text-text-primary font-semibold mb-4"
+              className="text-lg md:text-xl theme-text-primary font-semibold mb-4"
             >
               {personalInfo.title}
             </motion.h2>
@@ -115,7 +115,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
-              className="text-sm md:text-base text-text-secondary mb-7 max-w-md leading-relaxed"
+              className="text-sm md:text-base theme-text-secondary mb-7 max-w-md leading-relaxed"
             >
               {personalInfo.subtitle}
             </motion.p>
@@ -169,7 +169,7 @@ export default function Hero() {
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.12, y: -3 }}
                   whileTap={{ scale: 0.95 }}
-                  className="p-3 rounded-xl bg-[var(--color-glass-bg)] border border-[var(--color-glass-border)] backdrop-blur-xl text-text-secondary hover:text-[#ff7a18] hover:border-orange-400/40 transition-all shadow-lg shadow-[var(--color-shadow-card)]"
+                  className="p-3 rounded-xl bg-[var(--color-glass-bg)] border border-[var(--color-glass-border)] backdrop-blur-xl theme-text-secondary hover:text-[#ff7a18] hover:border-orange-400/40 transition-all shadow-lg shadow-[var(--color-shadow-card)]"
                   aria-label={social.label}
                 >
                   <social.icon size={18} />
@@ -190,12 +190,12 @@ export default function Hero() {
                 <div className="terminal-dot bg-red-500"></div>
                 <div className="terminal-dot bg-yellow-500"></div>
                 <div className="terminal-dot bg-green-500"></div>
-                <span className="ml-2 text-[10px] text-text-muted">terminal</span>
+                <span className="ml-2 text-[10px] theme-text-muted">terminal</span>
               </div>
 
               <div className="p-4 font-mono text-xs md:text-sm space-y-2">
                 {displayedLines.map((line, index) => (
-                  <p key={index} className="text-text-secondary">
+                  <p key={index} className="theme-text-secondary">
                     <span className="text-[#ff7a18]">$</span> {line}
                   </p>
                 ))}
@@ -216,10 +216,11 @@ export default function Hero() {
           opacity: { delay: 1.5, duration: 0.5 },
           y: { delay: 1.5, duration: 1.5, repeat: Infinity },
         }}
-        className="absolute bottom-5 left-1/2 -translate-x-1/2 text-text-muted hover:text-[#ff7a18] transition-colors z-20"
+        className="absolute bottom-5 left-1/2 -translate-x-1/2 theme-text-muted hover:text-[#ff7a18] transition-colors z-20"
       >
         <ChevronDown size={24} />
       </motion.button>
     </section>
   );
 }
+

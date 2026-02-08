@@ -101,7 +101,7 @@ function SkillPill({ skill, index }) {
                 size={16}
                 style={{ color: skill.color }}
             />
-            <span className="font-medium text-text-primary whitespace-nowrap">
+            <span className="font-medium theme-text-primary whitespace-nowrap">
                 {skill.name}
             </span>
         </motion.div>
@@ -139,7 +139,7 @@ export default function TechStack3() {
                             initial={{ opacity: 0, x: -10 }}
                             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -10 }}
                             transition={{ delay: 0.3 }}
-                            className="flex items-center gap-1 text-text-muted text-sm italic mb-2"
+                            className="flex items-center gap-1 theme-text-muted text-sm italic mb-2"
                         >
                             <span>Drag me!</span>
                             <svg
@@ -147,7 +147,7 @@ export default function TechStack3() {
                                 height="24"
                                 viewBox="0 0 24 24"
                                 fill="none"
-                                className="text-text-muted rotate-[180deg]"
+                                className="theme-text-muted rotate-[180deg]"
                             >
                                 <path
                                     d="M7 17L17 7M17 7H8M17 7V16"
@@ -179,3 +179,4 @@ export default function TechStack3() {
         </section>
     );
 }
+

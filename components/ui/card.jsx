@@ -24,14 +24,14 @@ CardHeader.displayName = "CardHeader";
 const CardTitle = forwardRef(({ className, ...props }, ref) => (
     <h3
         ref={ref}
-        className={cn("text-xl font-semibold heading-font text-text-primary", className)}
+        className={cn("text-xl font-semibold heading-font theme-text-primary", className)}
         {...props}
     />
 ));
 CardTitle.displayName = "CardTitle";
 
 const CardDescription = forwardRef(({ className, ...props }, ref) => (
-    <p ref={ref} className={cn("text-sm text-text-muted", className)} {...props} />
+    <p ref={ref} className={cn("text-sm theme-text-muted", className)} {...props} />
 ));
 CardDescription.displayName = "CardDescription";
 
@@ -46,3 +46,4 @@ const CardFooter = forwardRef(({ className, ...props }, ref) => (
 CardFooter.displayName = "CardFooter";
 
 export { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter };
+

@@ -76,11 +76,11 @@ function ProjectCard({ project, index, onClick }) {
 
       {/* Card Content */}
       <div className="p-5">
-        <h3 className="text-lg font-bold heading-font text-text-primary mb-2 group-hover:text-[#ff7a18] transition-colors">
+        <h3 className="text-lg font-bold heading-font theme-text-primary mb-2 group-hover:text-[#ff7a18] transition-colors">
           {project.title}
         </h3>
 
-        <p className="text-text-secondary text-sm leading-relaxed line-clamp-3 mb-4">
+        <p className="theme-text-secondary text-sm leading-relaxed line-clamp-3 mb-4">
           {project.description}
         </p>
 
@@ -173,7 +173,7 @@ function ProjectModal({ project, open, onOpenChange }) {
               {project.bullets.map((bullet, index) => (
                 <li
                   key={index}
-                  className="flex items-start gap-2 text-text-secondary text-sm"
+                  className="flex items-start gap-2 theme-text-secondary text-sm"
                 >
                   <span className="text-[#ff7a18] mt-0.5">•</span>
                   <span>{bullet}</span>
@@ -270,14 +270,14 @@ export default function Projects() {
                 onClick={scrollLeft}
                 className="p-2 rounded-xl glass-card hover:border-[#ff7a18]/50 transition-all"
               >
-                <ChevronLeft size={18} className="text-text-secondary" />
+                <ChevronLeft size={18} className="theme-text-secondary" />
               </button>
 
               <button
                 onClick={scrollRight}
                 className="p-2 rounded-xl glass-card hover:border-[#ff7a18]/50 transition-all"
               >
-                <ChevronRight size={18} className="text-text-secondary" />
+                <ChevronRight size={18} className="theme-text-secondary" />
               </button>
             </div>
           </div>
@@ -302,7 +302,7 @@ export default function Projects() {
 
           {/* Scroll Hint - Mobile */}
           <div className="flex md:hidden justify-center mt-4">
-            <span className="text-xs text-text-muted">
+            <span className="text-xs theme-text-muted">
               ← Swipe to explore →
             </span>
           </div>
@@ -318,3 +318,4 @@ export default function Projects() {
     </section>
   );
 }
+

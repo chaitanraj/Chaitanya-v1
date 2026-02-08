@@ -54,7 +54,7 @@ export default function Education() {
 
                             {/* Content */}
                             <div className="flex-1">
-                                <h3 className="text-xl font-bold heading-font text-text-primary">
+                                <h3 className="text-xl font-bold heading-font theme-text-primary">
                                     {education.degree}
                                 </h3>
                                 <p className="text-[#c918ff] font-medium text-lg">
@@ -66,16 +66,16 @@ export default function Education() {
                                     <div className="flex items-center gap-2 px-4 py-2 rounded-lg bg-[var(--color-background-secondary)] border border-[var(--color-divider)]">
                                         <Award size={18} className="text-[#ff7a18]" />
                                         <div>
-                                            <span className="text-text-muted text-xs block">GPA</span>
-                                            <span className="text-text-primary font-bold">{education.gpa}</span>
+                                            <span className="theme-text-muted text-xs block">GPA</span>
+                                            <span className="theme-text-primary font-bold">{education.gpa}</span>
                                         </div>
                                     </div>
 
                                     <div className="flex items-center gap-2 px-4 py-2 rounded-lg bg-[var(--color-background-secondary)] border border-[var(--color-divider)]">
                                         <Calendar size={18} className="text-[#c918ff]" />
                                         <div>
-                                            <span className="text-text-muted text-xs block">Expected</span>
-                                            <span className="text-text-primary font-bold">{education.year}</span>
+                                            <span className="theme-text-muted text-xs block">Expected</span>
+                                            <span className="theme-text-primary font-bold">{education.year}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -90,3 +90,4 @@ export default function Education() {
         </section>
     );
 }
+

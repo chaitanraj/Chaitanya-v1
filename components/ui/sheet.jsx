@@ -96,8 +96,9 @@ export function SheetHeader({ className, ...props }) {
 export function SheetTitle({ className, ...props }) {
     return (
         <h2
-            className={cn("text-xl font-semibold heading-font text-text-primary", className)}
+            className={cn("text-xl font-semibold heading-font theme-text-primary", className)}
             {...props}
         />
     );
 }
+

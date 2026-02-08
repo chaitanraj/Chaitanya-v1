@@ -8,7 +8,7 @@ const variants = {
     // Purple variant
     purple: "bg-[rgba(201,24,255,0.08)] text-[#c918ff] border border-[rgba(201,24,255,0.35)]",
     // Outline variant
-    outline: "bg-transparent text-text-secondary border border-[var(--color-glass-border)] hover:border-[var(--color-divider)]",
+    outline: "bg-transparent theme-text-secondary border border-[var(--color-glass-border)] hover:border-[var(--color-divider)]",
 };
 
 export function Badge({ children, variant = "default", className, ...props }) {
@@ -26,3 +26,4 @@ export function Badge({ children, variant = "default", className, ...props }) {
         </span>
     );
 }
+

@@ -67,7 +67,7 @@ export function DialogContent({ children, className, ...props }) {
                             onClick={() => onOpenChange(false)}
                             className="absolute right-4 top-4 p-1 rounded-lg hover:bg-[var(--color-glass-bg)] transition-colors"
                         >
-                            <X size={20} className="text-text-muted" />
+                            <X size={20} className="theme-text-muted" />
                         </button>
                         {children}
                     </motion.div>
@@ -84,7 +84,7 @@ export function DialogHeader({ className, ...props }) {
 export function DialogTitle({ className, ...props }) {
     return (
         <h2
-            className={cn("text-2xl font-bold heading-font text-text-primary", className)}
+            className={cn("text-2xl font-bold heading-font theme-text-primary", className)}
             {...props}
         />
     );
@@ -92,6 +92,7 @@ export function DialogTitle({ className, ...props }) {
 
 export function DialogDescription({ className, ...props }) {
     return (
-        <p className={cn("text-text-muted mt-2", className)} {...props} />
+        <p className={cn("theme-text-muted mt-2", className)} {...props} />
     );
 }
+
