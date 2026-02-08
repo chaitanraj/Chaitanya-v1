@@ -740,7 +740,7 @@ body {
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
-  scroll-padding-inline: 8px;
+  scroll-padding-inline: 50%;
   overscroll-behavior-x: contain;
   -webkit-overflow-scrolling: touch;
   touch-action: pan-x;
@@ -754,7 +754,7 @@ body {
 }
 
 .scroll-card {
-  scroll-snap-align: start;
+  scroll-snap-align: center;
   scroll-snap-stop: always;
   flex-shrink: 0;
   transform: translateZ(0);

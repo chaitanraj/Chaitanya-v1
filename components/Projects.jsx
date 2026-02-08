@@ -28,8 +28,9 @@ function ProjectCard({ project, index, onClick, reduceMotion }) {
       viewport={{ once: true, amount: 0.2 }}
       onClick={onClick}
       className={cn(
-        "scroll-card flex-shrink-0",
+        "scroll-card flex-shrink-0 flex flex-col",
         "w-[264px] sm:w-[340px] lg:w-[420px]",
+        "h-[420px] sm:h-[500px] lg:h-[540px]",
         "glass-card overflow-hidden cursor-pointer group rounded-2xl"
       )}
       whileHover={cardHoverAnimation}
@@ -67,7 +68,7 @@ function ProjectCard({ project, index, onClick, reduceMotion }) {
       </div>
 
       {/* Card Content */}
-      <div className="p-4 sm:p-5">
+      <div className="p-4 sm:p-5 flex flex-1 flex-col min-h-0">
         <h3 className="text-base sm:text-lg font-bold heading-font theme-text-primary mb-2 group-hover:text-[#ff7a18] transition-colors">
           {project.title}
         </h3>
@@ -77,7 +78,7 @@ function ProjectCard({ project, index, onClick, reduceMotion }) {
         </p>
 
         {/* Tech Stack Badges */}
-        <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-4 sm:mb-5">
+        <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-4 sm:mb-5 min-h-[52px] sm:min-h-[56px] content-start">
           {project.tech.slice(0, 3).map((tech) => (
             <Badge
               key={tech}
@@ -99,7 +100,7 @@ function ProjectCard({ project, index, onClick, reduceMotion }) {
         </div>
 
         {/* Action Buttons */}
-        <div className="flex gap-2.5 sm:gap-3">
+        <div className="flex gap-2.5 sm:gap-3 mt-auto">
           {/* Code */}
           <Button
             variant="secondary"
@@ -260,9 +261,11 @@ export default function Projects() {
 
     let nearestIndex = 0;
     let minDistance = Number.POSITIVE_INFINITY;
+    const containerCenter = container.scrollLeft + container.clientWidth / 2;
 
     cards.forEach((card, index) => {
-      const distance = Math.abs(card.offsetLeft - container.scrollLeft);
+      const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+      const distance = Math.abs(cardCenter - containerCenter);
       if (distance < minDistance) {
         minDistance = distance;
         nearestIndex = index;
@@ -280,7 +283,15 @@ export default function Projects() {
       if (!container || cards.length === 0) return;
 
       const boundedIndex = Math.max(0, Math.min(index, cards.length - 1));
-      container.scrollTo({ left: cards[boundedIndex].offsetLeft, behavior: "smooth" });
+      const card = cards[boundedIndex];
+      const targetLeft =
+        card.offsetLeft - (container.clientWidth / 2 - card.offsetWidth / 2);
+      const maxScrollLeft = container.scrollWidth - container.clientWidth;
+
+      container.scrollTo({
+        left: Math.max(0, Math.min(targetLeft, maxScrollLeft)),
+        behavior: "smooth",
+      });
     },
     [getCards]
   );
@@ -327,7 +338,7 @@ export default function Projects() {
               <button
                 type="button"
                 onClick={scrollLeft}
-                className="p-2 rounded-xl glass-card hover:border-[#ff7a18]/50 transition-all"
+                className="p-2 rounded-xl cursor-pointer glass-card hover:border-[#ff7a18]/50 transition-all"
                 aria-label="Scroll projects left"
               >
                 <ChevronLeft size={18} className="theme-text-secondary" />
@@ -336,7 +347,7 @@ export default function Projects() {
               <button
                 type="button"
                 onClick={scrollRight}
-                className="p-2 rounded-xl glass-card hover:border-[#ff7a18]/50 transition-all"
+                className="p-2 rounded-xl cursor-pointer glass-card hover:border-[#ff7a18]/50 transition-all"
                 aria-label="Scroll projects right"
               >
                 <ChevronRight size={18} className="theme-text-secondary" />
@@ -346,7 +357,10 @@ export default function Projects() {
 
           {/* Horizontal Scroll Container */}
           <div className="relative">
-            <div ref={scrollRef} className="horizontal-scroll-container pb-3 sm:pb-5">
+            <div
+              ref={scrollRef}
+              className="horizontal-scroll-container pb-3 sm:pb-5 px-[calc(50%_-_132px)] sm:px-[calc(50%_-_170px)] lg:px-[calc(50%_-_210px)]"
+            >
               {projects.map((project, index) => (
                 <ProjectCard
                   key={project.title}
