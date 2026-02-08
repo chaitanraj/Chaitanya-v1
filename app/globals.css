@@ -1072,7 +1072,7 @@ body::before {
   }
 
   .section-container {
-    padding: 38px 16px;
+    padding: 34px 14px;
   }
 
   .glass-card {
@@ -1100,10 +1100,22 @@ body::before {
   }
 }
 
+/* Mobile centered frame with subtle outer margin */
+@media (max-width: 768px) {
+  .main-content-wrapper {
+    width: calc(100% - 16px);
+    margin: 8px auto;
+    min-height: calc(100vh - 16px);
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid var(--color-glass-border);
+  }
+}
+
 /* Extra small phones */
 @media (max-width: 400px) {
   .section-container {
-    padding: 30px 14px;
+    padding: 28px 12px;
   }
 
   .text-display {

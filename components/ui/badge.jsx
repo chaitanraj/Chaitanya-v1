@@ -15,7 +15,7 @@ export function Badge({ children, variant = "default", className, ...props }) {
     return (
         <span
             className={cn(
-                "inline-flex items-center px-3 py-1 rounded-full text-xs font-medium transition-all duration-300",
+                "inline-flex items-center px-2.5 sm:px-3 py-1 rounded-full text-[10px] sm:text-xs font-medium transition-all duration-300",
                 "hover:shadow-[0_0_15px_rgba(255,122,24,0.2)]",
                 variants[variant],
                 className

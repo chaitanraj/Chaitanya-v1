@@ -7,7 +7,7 @@ const Card = forwardRef(({ className, hover = false, ...props }, ref) => (
     <div
         ref={ref}
         className={cn(
-            "glass-card p-6",
+            "glass-card p-4 sm:p-6",
             hover && "glass-card-hover cursor-pointer",
             className
         )}
@@ -24,7 +24,7 @@ CardHeader.displayName = "CardHeader";
 const CardTitle = forwardRef(({ className, ...props }, ref) => (
     <h3
         ref={ref}
-        className={cn("text-xl font-semibold heading-font theme-text-primary", className)}
+        className={cn("text-lg sm:text-xl font-semibold heading-font theme-text-primary", className)}
         {...props}
     />
 ));

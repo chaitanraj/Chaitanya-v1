@@ -65,7 +65,7 @@ export default function About() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ delay: 0.1 }}
-            className="text-4xl md:text-5xl font-bold heading-font mb-6 bg-gradient-to-r from-orange-400 via-pink-500 to-purple-500 bg-clip-text text-transparent"
+            className="text-3xl sm:text-4xl md:text-5xl font-bold heading-font mb-5 sm:mb-6 bg-gradient-to-r from-orange-400 via-pink-500 to-purple-500 bg-clip-text text-transparent"
           >
             About Me
           </motion.h2>
@@ -75,26 +75,26 @@ export default function About() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ delay: 0.15 }}
-            className="text-lg mb-12"
+            className="text-base sm:text-lg mb-8 sm:mb-12"
           >
             <SpotlightText
               text="A quick overview of who I am, what I build, and what I’m currently focused on."
-              textClassName="text-lg max-w-3xl"
+              textClassName="text-base sm:text-lg max-w-3xl"
             />
           </motion.div>
 
           {/* Main Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-14">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 sm:gap-8 mb-10 sm:mb-14">
             {/* About Text Card */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ delay: 0.2 }}
-              className="lg:col-span-2 glass-card p-8"
+              className="lg:col-span-2 glass-card p-5 sm:p-7 md:p-8"
             >
               <SpotlightText
                 text={aboutText}
-                textClassName="text-lg"
+                textClassName="text-[15px] sm:text-base md:text-lg"
               />
             </motion.div>
 
@@ -103,21 +103,21 @@ export default function About() {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ delay: 0.25 }}
-              className="glass-card p-8"
+              className="glass-card p-5 sm:p-7 md:p-8"
             >
-              <h3 className="text-xl font-semibold theme-text-primary mb-6">
+              <h3 className="text-lg sm:text-xl font-semibold theme-text-primary mb-4 sm:mb-6">
                 Quick Snapshot
               </h3>
 
-              <div className="space-y-5">
+              <div className="space-y-4 sm:space-y-5">
                 {/* Role */}
                 <div className="flex items-start gap-3">
                   <Code2 className="text-orange-400 mt-1 shrink-0" size={18} />
                   <div className="w-full">
-                    <p className="font-semibold theme-text-primary">Full Stack Developer</p>
+                    <p className="font-semibold theme-text-primary text-sm sm:text-base">Full Stack Developer</p>
                     <SpotlightText
                       text="MERN • PERN • AI/ML"
-                      textClassName="text-sm"
+                      textClassName="text-xs sm:text-sm"
                       containerClassName="-mt-1"
                     />
                   </div>
@@ -127,10 +127,10 @@ export default function About() {
                 <div className="flex items-start gap-3">
                   <Cpu className="text-pink-500 mt-1 shrink-0" size={18} />
                   <div className="w-full">
-                    <p className="font-semibold theme-text-primary">Focus</p>
+                    <p className="font-semibold theme-text-primary text-sm sm:text-base">Focus</p>
                     <SpotlightText
                       text="Scalable APIs, system design, performance"
-                      textClassName="text-sm"
+                      textClassName="text-xs sm:text-sm"
                       containerClassName="-mt-1"
                     />
                   </div>
@@ -140,10 +140,10 @@ export default function About() {
                 <div className="flex items-start gap-3">
                   <Rocket className="text-purple-400 mt-1 shrink-0" size={18} />
                   <div className="w-full">
-                    <p className="font-semibold theme-text-primary">Currently Building</p>
+                    <p className="font-semibold theme-text-primary text-sm sm:text-base">Currently Building</p>
                     <SpotlightText
                       text="Real-world apps + AI-integrated products"
-                      textClassName="text-sm"
+                      textClassName="text-xs sm:text-sm"
                       containerClassName="-mt-1"
                     />
                   </div>

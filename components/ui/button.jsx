@@ -21,9 +21,9 @@ const Button = forwardRef(({
     };
 
     const sizes = {
-        sm: "px-4 py-2 text-sm",
-        md: "px-6 py-2.5 text-sm",
-        lg: "px-8 py-3 text-base",
+        sm: "px-3.5 py-2 text-xs sm:text-sm",
+        md: "px-5 py-2.5 text-xs sm:text-sm",
+        lg: "px-6 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base",
     };
 
     const buttonClassName = cn(

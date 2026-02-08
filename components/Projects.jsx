@@ -29,19 +29,19 @@ function ProjectCard({ project, index, onClick, reduceMotion }) {
       onClick={onClick}
       className={cn(
         "scroll-card flex-shrink-0",
-        "w-[300px] sm:w-[360px] lg:w-[420px]",
+        "w-[264px] sm:w-[340px] lg:w-[420px]",
         "glass-card overflow-hidden cursor-pointer group rounded-2xl"
       )}
       whileHover={cardHoverAnimation}
     >
       {/* Project Cover Image */}
-      <div className="relative h-48 sm:h-52 lg:h-56 overflow-hidden">
+      <div className="relative h-40 sm:h-52 lg:h-56 overflow-hidden">
         {project.image ? (
           <Image
             src={project.image}
             alt={project.title}
             fill
-            sizes="(max-width: 640px) 300px, (max-width: 1024px) 360px, 420px"
+            sizes="(max-width: 640px) 264px, (max-width: 1024px) 340px, 420px"
             draggable={false}
             className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04] will-change-transform"
           />
@@ -67,22 +67,22 @@ function ProjectCard({ project, index, onClick, reduceMotion }) {
       </div>
 
       {/* Card Content */}
-      <div className="p-5">
-        <h3 className="text-lg font-bold heading-font theme-text-primary mb-2 group-hover:text-[#ff7a18] transition-colors">
+      <div className="p-4 sm:p-5">
+        <h3 className="text-base sm:text-lg font-bold heading-font theme-text-primary mb-2 group-hover:text-[#ff7a18] transition-colors">
           {project.title}
         </h3>
 
-        <p className="theme-text-secondary text-sm leading-relaxed line-clamp-3 mb-4">
+        <p className="theme-text-secondary text-xs sm:text-sm leading-relaxed line-clamp-3 mb-4">
           {project.description}
         </p>
 
         {/* Tech Stack Badges */}
-        <div className="flex flex-wrap gap-2 mb-5">
+        <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-4 sm:mb-5">
           {project.tech.slice(0, 3).map((tech) => (
             <Badge
               key={tech}
               variant="default"
-              className="text-[11px] px-3 py-1 rounded-full"
+              className="text-[10px] sm:text-[11px] px-2.5 sm:px-3 py-1 rounded-full"
             >
               {tech}
             </Badge>
@@ -91,7 +91,7 @@ function ProjectCard({ project, index, onClick, reduceMotion }) {
           {project.tech.length > 3 && (
             <Badge
               variant="outline"
-              className="text-[11px] px-3 py-1 rounded-full"
+              className="text-[10px] sm:text-[11px] px-2.5 sm:px-3 py-1 rounded-full"
             >
               +{project.tech.length - 3}
             </Badge>
@@ -99,12 +99,12 @@ function ProjectCard({ project, index, onClick, reduceMotion }) {
         </div>
 
         {/* Action Buttons */}
-        <div className="flex gap-3">
+        <div className="flex gap-2.5 sm:gap-3">
           {/* Code */}
           <Button
             variant="secondary"
             size="sm"
-            className="flex-1 text-sm py-3 rounded-xl"
+            className="flex-1 text-xs sm:text-sm py-2.5 sm:py-3 rounded-xl"
             asChild
           >
             <a
@@ -113,7 +113,7 @@ function ProjectCard({ project, index, onClick, reduceMotion }) {
               rel="noopener noreferrer"
               onClick={(e) => e.stopPropagation()}
             >
-              <Github size={16} className="mr-2" />
+              <Github size={14} className="mr-1.5 sm:mr-2 sm:h-4 sm:w-4" />
               Code
             </a>
           </Button>
@@ -123,7 +123,7 @@ function ProjectCard({ project, index, onClick, reduceMotion }) {
             variant="primary"
             size="sm"
             className={cn(
-              "flex-1 text-sm py-3 rounded-xl",
+              "flex-1 text-xs sm:text-sm py-2.5 sm:py-3 rounded-xl",
               !project.live && "opacity-50 cursor-not-allowed"
             )}
             asChild={!!project.live}
@@ -135,12 +135,12 @@ function ProjectCard({ project, index, onClick, reduceMotion }) {
                 rel="noopener noreferrer"
                 onClick={(e) => e.stopPropagation()}
               >
-                <ExternalLink size={16} className="mr-2" />
+                <ExternalLink size={14} className="mr-1.5 sm:mr-2 sm:h-4 sm:w-4" />
                 Live
               </a>
             ) : (
               <span className="flex items-center justify-center gap-2 cursor-not-allowed">
-                <ExternalLink size={16} className="opacity-70" />
+                <ExternalLink size={14} className="opacity-70 sm:h-4 sm:w-4" />
                 Live
               </span>
             )}
@@ -249,8 +249,8 @@ export default function Projects() {
 
   const scrollAmount = useMemo(() => {
     if (typeof window === "undefined") return 360;
-    if (window.innerWidth < 640) return 300;
-    if (window.innerWidth < 1024) return 340;
+    if (window.innerWidth < 640) return 278;
+    if (window.innerWidth < 1024) return 330;
     return 420;
   }, []);
 
@@ -301,7 +301,7 @@ export default function Projects() {
           transition={{ duration: 0.5, ease: "easeOut" }}
         >
           {/* Section Header */}
-          <div className="flex items-center justify-between mb-8">
+          <div className="flex items-center justify-between mb-6 sm:mb-8">
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
@@ -331,7 +331,7 @@ export default function Projects() {
 
           {/* Horizontal Scroll Container */}
           <div className="relative">
-            <div ref={scrollRef} className="horizontal-scroll-container pb-5">
+            <div ref={scrollRef} className="horizontal-scroll-container pb-3 sm:pb-5">
               {projects.map((project, index) => (
                 <ProjectCard
                   key={project.title}
@@ -344,13 +344,13 @@ export default function Projects() {
             </div>
 
             {/* Gradient Fade Edges */}
-            <div className="absolute left-0 top-0 bottom-0 w-10 bg-gradient-to-r from-[var(--color-background)] to-transparent pointer-events-none" />
-            <div className="absolute right-0 top-0 bottom-0 w-10 bg-gradient-to-l from-[var(--color-background)] to-transparent pointer-events-none" />
+            <div className="absolute left-0 top-0 bottom-0 w-6 sm:w-10 bg-gradient-to-r from-[var(--color-background)] to-transparent pointer-events-none" />
+            <div className="absolute right-0 top-0 bottom-0 w-6 sm:w-10 bg-gradient-to-l from-[var(--color-background)] to-transparent pointer-events-none" />
           </div>
 
           {/* Scroll Hint - Mobile */}
           <div className="flex md:hidden justify-center mt-4">
-            <span className="text-xs theme-text-muted">
+            <span className="text-[11px] theme-text-muted">
               ← Swipe to explore →
             </span>
           </div>

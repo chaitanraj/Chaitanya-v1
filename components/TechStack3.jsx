@@ -86,18 +86,21 @@ function SkillPill({ skill, index }) {
       whileTap={{ scale: 0.98 }}
       className="
         inline-flex items-center justify-center
- l       gap-1.5 sm:gap-2 rounded-lg
+        gap-1.5 sm:gap-2 rounded-lg
         bg-[var(--color-glass-bg)] border border-dashed border-[var(--color-glass-border)]
         backdrop-blur-md cursor-grab active:cursor-grabbing
         shadow-md shadow-[var(--color-shadow-card)] hover:shadow-lg
         transition-all duration-200
 
-        px-3 py-1.5 text-xs
+        px-2.5 py-1 text-[11px]
         sm:px-4 sm:py-2 sm:text-sm
       "
     >
-      <Icon className="shrink-0" size={14} style={{ color: skill.color }} />
-      <span className="font-medium theme-text-primary whitespace-nowrap">
+      <Icon
+        className="shrink-0 h-3.5 w-3.5 sm:h-4 sm:w-4"
+        style={{ color: skill.color }}
+      />
+      <span className="font-medium theme-text-primary whitespace-nowrap text-[11px] sm:text-sm">
         {skill.name}
       </span>
     </motion.div>
@@ -116,16 +119,16 @@ export default function TechStack3() {
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
           transition={{ duration: 0.6 }}
-          className="max-w-5xl mx-auto"
+          className="max-w-4xl mx-auto"
         >
           {/* Header */}
-          <div className="flex items-end justify-between mb-7">
+          <div className="flex items-end justify-between mb-5 sm:mb-7">
             <motion.div
               initial={{ opacity: 0, y: 15 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
               transition={{ delay: 0.1 }}
             >
-              <h2 className="text-2xl md:text-5xl font-bold heading-font bg-gradient-to-r from-orange-400 via-pink-500 to-purple-500 bg-clip-text text-transparent">
+              <h2 className="text-xl sm:text-2xl md:text-5xl font-bold heading-font bg-gradient-to-r from-orange-400 via-pink-500 to-purple-500 bg-clip-text text-transparent">
                 Tech Stack
               </h2>
             </motion.div>
@@ -135,7 +138,7 @@ export default function TechStack3() {
               initial={{ opacity: 0, x: -10 }}
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -10 }}
               transition={{ delay: 0.3 }}
-              className="hidden sm:flex items-center gap-1 theme-text-muted text-sm italic mb-2"
+              className="hidden sm:flex items-center gap-1 theme-text-muted text-xs italic mb-2"
             >
               <span>Drag me!</span>
               <svg
@@ -162,8 +165,7 @@ export default function TechStack3() {
             animate={isInView ? { opacity: 1 } : { opacity: 0 }}
             transition={{ delay: 0.2, duration: 0.5 }}
             className="
-              flex flex-wrap justify-center sm:justify-start gap:0.5
-              sm:gap-1
+              flex flex-wrap justify-start gap-1.5 sm:gap-2
             "
           >
             {skills.map((skill, index) => (
