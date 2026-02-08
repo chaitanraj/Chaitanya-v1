@@ -20,7 +20,7 @@ export default function Contact() {
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
           transition={{ duration: 0.6 }}
-          className="max-w-4xl mx-auto text-center"
+          className="max-w-4xl mx-auto text-center theme-surface-emphasis border border-[var(--color-glass-border)] rounded-[24px] backdrop-blur-xl shadow-[0_20px_60px_var(--color-shadow-card)] px-6 py-10 md:px-10 md:py-12"
         >
           {/* Section Title */}
           <motion.h2

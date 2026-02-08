@@ -46,8 +46,9 @@ export function DialogContent({ children, className, ...props }) {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         onClick={() => onOpenChange(false)}
-                        className="fixed inset-0 theme-overlay z-[200]"
+                        className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[200]"
                     />
+
 
                     {/* Dialog */}
                     <motion.div
@@ -57,8 +58,8 @@ export function DialogContent({ children, className, ...props }) {
                         transition={{ duration: 0.2 }}
                         className={cn(
                             "fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-[201]",
-                            "w-[90vw] max-w-2xl max-h-[85vh] overflow-y-auto",
-                            "glass-card p-6",
+                            "w-[92vw] max-w-2xl max-h-[85vh] overflow-y-auto",
+                            "bg-[var(--color-background)] border border-[var(--color-glass-border)] rounded-2xl shadow-2xl p-8",
                             className
                         )}
                         {...props}

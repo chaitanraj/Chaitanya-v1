@@ -34,6 +34,7 @@
   /* Glass Effects */
   --color-glass-bg: rgba(12, 13, 20, 0.46);
   --color-glass-bg-strong: rgba(12, 13, 20, 0.62);
+  --color-glass-bg-emphasis: rgba(12, 13, 20, 0.74);
   --color-glass-border: rgba(255, 255, 255, 0.12);
   --color-glass-border-hover: rgba(255, 122, 24, 0.26);
   --color-divider: rgba(255, 255, 255, 0.14);
@@ -86,6 +87,7 @@
 
   --color-glass-bg: rgba(255, 255, 255, 0.56);
   --color-glass-bg-strong: rgba(255, 255, 255, 0.70);
+  --color-glass-bg-emphasis: rgba(255, 255, 255, 0.84);
   --color-glass-border: rgba(0, 0, 0, 0.06);
   --color-glass-border-hover: rgba(255, 122, 24, 0.18);
   --color-divider: rgba(0, 0, 0, 0.08);
@@ -160,6 +162,10 @@ body {
 
 .theme-surface-strong {
   background: var(--color-glass-bg-strong);
+}
+
+.theme-surface-emphasis {
+  background: var(--color-glass-bg-emphasis);
 }
 
 .theme-divider {

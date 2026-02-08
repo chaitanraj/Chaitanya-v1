@@ -19,6 +19,7 @@ import { cn } from "@/lib/utils";
 // Project Card Component
 function ProjectCard({ project, index, onClick, reduceMotion }) {
   const cardHoverAnimation = reduceMotion ? undefined : { scale: 1.01, y: -2 };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 40 }}
@@ -99,6 +100,7 @@ function ProjectCard({ project, index, onClick, reduceMotion }) {
 
         {/* Action Buttons */}
         <div className="flex gap-3">
+          {/* Code */}
           <Button
             variant="secondary"
             size="sm"
@@ -116,21 +118,32 @@ function ProjectCard({ project, index, onClick, reduceMotion }) {
             </a>
           </Button>
 
+          {/* Live (Disabled if no link) */}
           <Button
             variant="primary"
             size="sm"
-            className="flex-1 text-sm py-3 rounded-xl"
-            asChild
+            className={cn(
+              "flex-1 text-sm py-3 rounded-xl",
+              !project.live && "opacity-50 cursor-not-allowed"
+            )}
+            asChild={!!project.live}
           >
-            <a
-              href={project.live}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <ExternalLink size={16} className="mr-2" />
-              Live
-            </a>
+            {project.live ? (
+              <a
+                href={project.live}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <ExternalLink size={16} className="mr-2" />
+                Live
+              </a>
+            ) : (
+              <span className="flex items-center justify-center gap-2 cursor-not-allowed">
+                <ExternalLink size={16} className="opacity-70" />
+                Live
+              </span>
+            )}
           </Button>
         </div>
       </div>
@@ -144,17 +157,17 @@ function ProjectModal({ project, open, onOpenChange }) {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-lg">
+      <DialogContent className="max-w-xl">
         <DialogHeader>
-          <DialogTitle className="text-xl text-gradient">
+          <DialogTitle className="text-2xl text-gradient">
             {project.title}
           </DialogTitle>
-          <DialogDescription className="text-sm mt-2">
+          <DialogDescription className="text-base mt-3 leading-relaxed">
             {project.description}
           </DialogDescription>
         </DialogHeader>
 
-        <div className="space-y-4 mt-3">
+        <div className="space-y-5 mt-4">
           {/* Key Features */}
           <div>
             <h4 className="text-xs font-semibold text-[#ff7a18] mb-2">
@@ -196,11 +209,26 @@ function ProjectModal({ project, open, onOpenChange }) {
               </a>
             </Button>
 
-            <Button variant="primary" size="sm" asChild className="flex-1">
-              <a href={project.live} target="_blank" rel="noopener noreferrer">
-                <ExternalLink size={15} className="mr-2" />
-                Live Demo
-              </a>
+            <Button
+              variant="primary"
+              size="sm"
+              className={cn(
+                "flex-1",
+                !project.live && "opacity-50 cursor-not-allowed"
+              )}
+              asChild={!!project.live}
+            >
+              {project.live ? (
+                <a href={project.live} target="_blank" rel="noopener noreferrer">
+                  <ExternalLink size={15} className="mr-2" />
+                  Live Demo
+                </a>
+              ) : (
+                <span className="flex items-center justify-center gap-2 cursor-not-allowed">
+                  <ExternalLink size={15} className="opacity-70" />
+                  Live Demo
+                </span>
+              )}
             </Button>
           </div>
         </div>
@@ -231,8 +259,15 @@ export default function Projects() {
     scrollRef.current.scrollBy({ left: delta, behavior: "smooth" });
   }, []);
 
-  const scrollLeft = useCallback(() => scrollByAmount(-scrollAmount), [scrollByAmount, scrollAmount]);
-  const scrollRight = useCallback(() => scrollByAmount(scrollAmount), [scrollByAmount, scrollAmount]);
+  const scrollLeft = useCallback(
+    () => scrollByAmount(-scrollAmount),
+    [scrollByAmount, scrollAmount]
+  );
+
+  const scrollRight = useCallback(
+    () => scrollByAmount(scrollAmount),
+    [scrollByAmount, scrollAmount]
+  );
 
   const handleProjectClick = (project) => {
     setSelectedProject(project);
@@ -331,4 +366,3 @@ export default function Projects() {
     </section>
   );
 }
-

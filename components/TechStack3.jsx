@@ -86,7 +86,7 @@ function SkillPill({ skill, index }) {
       whileTap={{ scale: 0.98 }}
       className="
         inline-flex items-center justify-center
-        gap-1.5 sm:gap-2 rounded-full
+ l       gap-1.5 sm:gap-2 rounded-lg
         bg-[var(--color-glass-bg)] border border-dashed border-[var(--color-glass-border)]
         backdrop-blur-md cursor-grab active:cursor-grabbing
         shadow-md shadow-[var(--color-shadow-card)] hover:shadow-lg
@@ -96,7 +96,7 @@ function SkillPill({ skill, index }) {
         sm:px-4 sm:py-2 sm:text-sm
       "
     >
-      <Icon className="shrink-0" size={16} style={{ color: skill.color }} />
+      <Icon className="shrink-0" size={14} style={{ color: skill.color }} />
       <span className="font-medium theme-text-primary whitespace-nowrap">
         {skill.name}
       </span>
@@ -125,7 +125,7 @@ export default function TechStack3() {
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
               transition={{ delay: 0.1 }}
             >
-              <h2 className="text-4xl md:text-5xl font-bold heading-font bg-gradient-to-r from-orange-400 via-pink-500 to-purple-500 bg-clip-text text-transparent">
+              <h2 className="text-2xl md:text-5xl font-bold heading-font bg-gradient-to-r from-orange-400 via-pink-500 to-purple-500 bg-clip-text text-transparent">
                 Tech Stack
               </h2>
             </motion.div>
@@ -162,8 +162,8 @@ export default function TechStack3() {
             animate={isInView ? { opacity: 1 } : { opacity: 0 }}
             transition={{ delay: 0.2, duration: 0.5 }}
             className="
-              flex flex-wrap justify-center sm:justify-start
-              gap-1.5 sm:gap-2
+              flex flex-wrap justify-center sm:justify-start gap:0.5
+              sm:gap-1
             "
           >
             {skills.map((skill, index) => (

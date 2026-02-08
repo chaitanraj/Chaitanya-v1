@@ -9,6 +9,17 @@ const COLORS = [
     { r: 201, g: 24, b: 255 },   // Purple #c918ff
 ];
 
+// Tuned for slightly denser and more frequent motion
+const PIPE_SETTINGS = {
+    gridSize: 68,
+    areaPerPipe: 120000,
+    maxPipes: 8,
+    turnChance: 0.35,
+    minSpeed: 1.7,
+    speedVariance: 0.9,
+    flowRate: 1.8,
+};
+
 // Pipe class for managing individual pipes
 class Pipe {
     constructor(canvas, gridSize) {
@@ -49,7 +60,7 @@ class Pipe {
         this.color = COLORS[Math.floor(Math.random() * COLORS.length)];
         this.segments = [{ x: this.x, y: this.y }];
         this.maxSegments = 25 + Math.floor(Math.random() * 20);
-        this.speed = 1.5 + Math.random() * 0.8; // Slightly faster overall motion
+        this.speed = PIPE_SETTINGS.minSpeed + Math.random() * PIPE_SETTINGS.speedVariance;
         this.opacity = 0;
         this.fadeIn = true;
         this.fadeOut = false;
@@ -58,7 +69,7 @@ class Pipe {
     }
 
     update() {
-        // Fade in/out - faster
+        // Fade in/out
         if (this.fadeIn) {
             this.opacity = Math.min(1, this.opacity + 0.04);
             if (this.opacity >= 1) this.fadeIn = false;
@@ -71,7 +82,7 @@ class Pipe {
             }
         }
 
-        // Move pipe - faster
+        // Move pipe
         const dx = [0, 1, 0, -1][this.direction] * this.speed;
         const dy = [-1, 0, 1, 0][this.direction] * this.speed;
 
@@ -90,8 +101,8 @@ class Pipe {
 
             this.segments.push({ x: this.x, y: this.y });
 
-            // Random turn (30% chance)
-            if (Math.random() < 0.3) {
+            // Slightly more frequent turns for livelier movement
+            if (Math.random() < PIPE_SETTINGS.turnChance) {
                 const turns = this.direction % 2 === 0 ? [1, 3] : [0, 2];
                 this.direction = turns[Math.floor(Math.random() * 2)];
             }
@@ -108,8 +119,8 @@ class Pipe {
             this.fadeOut = true;
         }
 
-        // Update flow animation - faster
-        this.flowOffset += 1.5;
+        // Update flow animation
+        this.flowOffset += PIPE_SETTINGS.flowRate;
     }
 
     draw(ctx, centerX, centerY) {
@@ -201,12 +212,12 @@ export default function PipesBackground() {
     const animationRef = useRef(null);
 
     const initPipes = useCallback((canvas) => {
-        const gridSize = 70;
+        const gridSize = PIPE_SETTINGS.gridSize;
         // More pipes for full page
-        const pipeCount = Math.floor((canvas.width * canvas.height) / 150000);
+        const pipeCount = Math.floor((canvas.width * canvas.height) / PIPE_SETTINGS.areaPerPipe);
         pipesRef.current = [];
 
-        for (let i = 0; i < Math.min(pipeCount, 6); i++) {
+        for (let i = 0; i < Math.min(pipeCount, PIPE_SETTINGS.maxPipes); i++) {
             const pipe = new Pipe(canvas, gridSize);
             pipe.opacity = Math.random(); // Stagger initial opacity
             pipesRef.current.push(pipe);
@@ -250,13 +261,23 @@ export default function PipesBackground() {
             const parent = canvas.parentElement;
             if (parent) {
                 canvas.width = parent.offsetWidth;
-                canvas.height = parent.offsetHeight;
+                // Use scrollHeight to capture the full content height, not just viewport
+                canvas.height = Math.max(parent.offsetHeight, parent.scrollHeight, document.documentElement.scrollHeight);
                 initPipes(canvas);
             }
         };
 
         handleResize();
         window.addEventListener("resize", handleResize);
+
+        // Use ResizeObserver to detect content height changes (e.g., when all sections render)
+        const resizeObserver = new ResizeObserver(() => {
+            handleResize();
+        });
+
+        if (canvas.parentElement) {
+            resizeObserver.observe(canvas.parentElement);
+        }
 
         // Start animation
         const render = () => {
@@ -281,6 +302,7 @@ export default function PipesBackground() {
 
         return () => {
             window.removeEventListener("resize", handleResize);
+            resizeObserver.disconnect();
             if (animationRef.current) {
                 cancelAnimationFrame(animationRef.current);
             }

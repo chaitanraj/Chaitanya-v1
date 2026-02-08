@@ -34,7 +34,7 @@ export default function Education() {
                         initial={{ opacity: 0, y: 30 }}
                         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                         transition={{ delay: 0.2 }}
-                        className="glass-card p-8 relative overflow-hidden group hover:border-[#ff7a18]/30 transition-colors"
+                        className="glass-card theme-surface-emphasis p-8 relative overflow-hidden group hover:border-[#ff7a18]/30 transition-colors"
                     >
                         {/* Animated Gradient Underline - Orange → Pink → Purple */}
                         <motion.div
