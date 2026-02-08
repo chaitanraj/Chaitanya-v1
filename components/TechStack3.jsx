@@ -138,7 +138,7 @@ export default function TechStack3() {
               initial={{ opacity: 0, x: -10 }}
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -10 }}
               transition={{ delay: 0.3 }}
-              className="hidden sm:flex items-center gap-1 theme-text-muted text-xs italic mb-2"
+              className="hidden sm:flex items-center gap-1 theme-text-muted text-lg italic font-extrabold mb-2"
             >
               <span>Drag me!</span>
               <svg
@@ -165,7 +165,7 @@ export default function TechStack3() {
             animate={isInView ? { opacity: 1 } : { opacity: 0 }}
             transition={{ delay: 0.2, duration: 0.5 }}
             className="
-              flex flex-wrap justify-start gap-1.5 sm:gap-2
+              flex flex-wrap justify-start gap-0.5 sm:gap-1
             "
           >
             {skills.map((skill, index) => (

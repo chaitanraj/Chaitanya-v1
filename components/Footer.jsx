@@ -10,10 +10,10 @@ export default function Footer() {
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center text-sm sm:text-base theme-text-secondary italic"
+          className="text-center text-sm sm:text-base theme-text-primary italic"
         >
           &quot; ...miles to go before I sleep &quot;
-          <br></br>  Robert Frost
+          <br></br>  -Robert Frost
         </motion.p>
       </div>
     </footer>
