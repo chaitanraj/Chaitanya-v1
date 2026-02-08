@@ -27,7 +27,7 @@ export default function Contact() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ delay: 0.1 }}
-            className="text-3xl sm:text-4xl md:text-5xl font-bold heading-font mb-4 sm:mb-6 bg-gradient-to-r from-orange-400 via-pink-500 to-purple-500 bg-clip-text text-transparent"
+            className="text-3xl sm:text-4xl md:text-5xl font-bold heading-font mb-4 sm:mb-6 text-gradient"
           >
             Let’s Work Together
           </motion.h2>

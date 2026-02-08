@@ -146,7 +146,7 @@ export default function TechStack3() {
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
               transition={{ delay: 0.1 }}
             >
-              <h2 className="text-xl sm:text-2xl md:text-5xl font-bold heading-font bg-gradient-to-r from-orange-400 via-pink-500 to-purple-500 bg-clip-text text-transparent">
+              <h2 className="text-xl sm:text-2xl md:text-5xl font-bold heading-font text-gradient">
                 Tech Stack
               </h2>
             </motion.div>
