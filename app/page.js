@@ -10,25 +10,23 @@ import Footer from "@/components/Footer";
 import PipesBackground from "@/components/PipesBackground";
 import TechStack3 from "@/components/TechStack3";
 import Margin from "@/components/Margin";
-import FloatingDock from "@/components/FloatingDock";
 
 export default function Home() {
   return (
     <main id="home" className="relative">
-      <FloatingDock />
       <Hero />
       <About />
-      <Margin/>
-      <TechStack3/>
-      <Margin/>
+      <Margin />
+      <TechStack3 />
+      <Margin />
       <Projects />
-      <Margin/>
+      <Margin />
       <Experience />
-      <Margin/>
+      <Margin />
       <Education />
-      <Margin/>
+      <Margin />
       <Contact />
-      <Margin/>
+      <Margin />
       <Footer />
     </main>
   );

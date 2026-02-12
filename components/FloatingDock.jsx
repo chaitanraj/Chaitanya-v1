@@ -1,5 +1,4 @@
 "use client";
-
 import { useEffect, useState, useSyncExternalStore } from "react";
 import {
     Home,
@@ -27,7 +26,7 @@ const socialLinks = [
 ];
 
 const subscribe = (callback) => {
-    if (typeof window === "undefined") return () => {};
+    if (typeof window === "undefined") return () => { };
     const frameId = window.requestAnimationFrame(callback);
     return () => window.cancelAnimationFrame(frameId);
 };
@@ -47,7 +46,7 @@ export default function FloatingDock() {
             .filter((l) => l.href.startsWith("#"))
             .map((l) => document.querySelector(l.href))
             .filter(Boolean);
-            
+
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach((entry) => {
