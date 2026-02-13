@@ -130,7 +130,7 @@ useEffect(() => {
 
     const value = Math.abs(x) + Math.abs(y) + Math.abs(z);
 
-    if (value > 10 && span) {
+    if (value > 20 && span) {
       span.textContent = "Thanks for the shake";
     }
   }
