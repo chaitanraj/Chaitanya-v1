@@ -66,18 +66,6 @@ const skills = [
 
 const span = document.getElementById("shaketext");
 
-function handleMotionEvent(event) {
-  const x = event.accelerationIncludingGravity.x;
-  const y = event.accelerationIncludingGravity.y;
-  const z = event.accelerationIncludingGravity.z;
-  const value=Math.abs(x)+Math.abs(y)+Math.abs(z);
-
-  if(value>10){
-    span.textContent="Thanks for the shake"
-  }
-}
-
-window.addEventListener("devicemotion", handleMotionEvent);
 
 // Single Skill Pill Component - Optimized for mobile performance
 function SkillPill({ skill, index, isMobile }) {
@@ -134,6 +122,28 @@ export default function TechStack3() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-60px" });
 
+useEffect(() => {
+  const span = document.getElementById("shaketext");
+
+  function handleMotionEvent(event) {
+    const x = event.accelerationIncludingGravity?.x || 0;
+    const y = event.accelerationIncludingGravity?.y || 0;
+    const z = event.accelerationIncludingGravity?.z || 0;
+
+    const value = Math.abs(x) + Math.abs(y) + Math.abs(z);
+
+    if (value > 10 && span) {
+      span.textContent = "Thanks for the shake";
+    }
+  }
+
+  window.addEventListener("devicemotion", handleMotionEvent);
+
+  return () => {
+    window.removeEventListener("devicemotion", handleMotionEvent);
+  };
+}, []);
+
   // Detect mobile for performance optimizations
   const [isMobile, setIsMobile] = useState(false);
 
@@ -166,7 +176,7 @@ export default function TechStack3() {
               </h2>
             </motion.div>
 
-            {/* Drag me hint */}
+            {/* Drag pills hint */}
             <motion.div
               initial={{ opacity: 0, x: -10 }}
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -10 }}
