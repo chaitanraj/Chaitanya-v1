@@ -85,12 +85,12 @@
   --color-text-muted: rgba(0, 0, 0, 0.85);
   --color-text-disabled: rgba(0, 0, 0, 0.56);
 
-  --color-glass-bg: rgba(255, 255, 255, 0.56);
-  --color-glass-bg-strong: rgba(255, 255, 255, 0.70);
-  --color-glass-bg-emphasis: rgba(255, 255, 255, 0.84);
-  --color-glass-border: rgba(0, 0, 0, 0.06);
-  --color-glass-border-hover: rgba(255, 122, 24, 0.18);
-  --color-divider: rgba(0, 0, 0, 0.08);
+  --color-glass-bg: rgba(235, 230, 245, 0.55);
+  --color-glass-bg-strong: rgba(230, 225, 240, 0.70);
+  --color-glass-bg-emphasis: rgba(240, 236, 248, 0.84);
+  --color-glass-border: rgba(0, 0, 0, 0.10);
+  --color-glass-border-hover: rgba(255, 122, 24, 0.25);
+  --color-divider: rgba(0, 0, 0, 0.10);
 
   --color-glow-orange: rgba(255, 122, 24, 0.12);
   --color-glow-pink: rgba(255, 77, 109, 0.1);
@@ -1176,6 +1176,25 @@ body::before {
 }
 
 /* ============================================
+   PILL ITEM - Light mode visibility
+   ============================================ */
+
+:root.theme-light .pill-item {
+  background: rgba(235, 230, 248, 0.62);
+  border: 1px dashed rgba(0, 0, 0, 0.13);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+@media (max-width: 640px) {
+  :root.theme-light .pill-item {
+    background: rgba(232, 226, 248, 0.72);
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
+/* ============================================
    PRELOADER - Minimal Premium Cyber Screen
    ============================================ */
 
@@ -1431,5 +1450,37 @@ section {
   .preloader-exit {
     transform: none;
     filter: none;
+  }
+}
+
+/* ============================================
+   LIGHT MODE MOBILE PERFORMANCE FIXES
+   Disable expensive effects that cause lag
+   ============================================ */
+
+@media (max-width: 640px) {
+  :root.theme-light .main-content-wrapper {
+    background-size: 100% 100%;
+    animation: none;
+  }
+
+  :root.theme-light .mesh-gradient {
+    background-size: 100% 100%;
+    animation: none;
+  }
+
+  :root.theme-light .glass-card {
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+
+  :root.theme-light body::before {
+    opacity: 0;
+  }
+
+  :root.theme-light .gradient-orb {
+    filter: blur(100px);
+    animation: none;
+    opacity: 0.25;
   }
 }

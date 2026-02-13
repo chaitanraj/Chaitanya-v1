@@ -226,15 +226,18 @@ export default function PipesBackground() {
 
     const drawGrid = useCallback((ctx, width, height, centerX, centerY) => {
         const gridSize = 70;
+        const isLight = document.documentElement.classList.contains('theme-light');
+        const baseColor = isLight ? '0, 0, 0' : '255, 255, 255';
 
-        ctx.strokeStyle = "rgba(255, 255, 255, 0.03)";
         ctx.lineWidth = 1;
 
         // Vertical lines
         for (let x = 0; x <= width; x += gridSize) {
             const distFromCenter = Math.abs(x - centerX);
-            const opacity = 0.015 + (distFromCenter / centerX) * 0.025;
-            ctx.strokeStyle = `rgba(255, 255, 255, ${opacity})`;
+            const opacity = isLight
+                ? 0.025 + (distFromCenter / centerX) * 0.035
+                : 0.015 + (distFromCenter / centerX) * 0.025;
+            ctx.strokeStyle = `rgba(${baseColor}, ${opacity})`;
             ctx.beginPath();
             ctx.moveTo(x, 0);
             ctx.lineTo(x, height);
@@ -244,8 +247,10 @@ export default function PipesBackground() {
         // Horizontal lines
         for (let y = 0; y <= height; y += gridSize) {
             const distFromCenter = Math.abs(y - centerY);
-            const opacity = 0.015 + (distFromCenter / centerY) * 0.025;
-            ctx.strokeStyle = `rgba(255, 255, 255, ${opacity})`;
+            const opacity = isLight
+                ? 0.025 + (distFromCenter / centerY) * 0.035
+                : 0.015 + (distFromCenter / centerY) * 0.025;
+            ctx.strokeStyle = `rgba(${baseColor}, ${opacity})`;
             ctx.beginPath();
             ctx.moveTo(0, y);
             ctx.lineTo(width, y);

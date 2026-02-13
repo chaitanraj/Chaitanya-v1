@@ -100,6 +100,7 @@ function SkillPill({ skill, index, isMobile }) {
         transition-transform duration-150
         px-2.5 py-1 text-[11px]
         sm:px-4 sm:py-2 sm:text-sm
+        pill-item
       "
       style={{ willChange: 'transform' }}
     >

@@ -1,7 +1,5 @@
-import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
-import TechStack from "@/components/TechStack";
 import Projects from "@/components/Projects";
 import Experience from "@/components/Experience";
 import Education from "@/components/Education";
@@ -13,7 +11,7 @@ import Margin from "@/components/Margin";
 
 export default function Home() {
   return (
-    <main id="home" className="min-h-screen relative">
+    <main className="min-h-screen relative">
       <Hero />
       <About />
       <Margin />
