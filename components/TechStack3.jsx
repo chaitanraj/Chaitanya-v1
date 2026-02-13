@@ -64,8 +64,6 @@ const skills = [
   { name: "Chrome Extensions", icon: FaChrome, color: "#4285F4" },
 ];
 
-const span = document.getElementById("shaketext");
-
 
 // Single Skill Pill Component - Optimized for mobile performance
 function SkillPill({ skill, index, isMobile }) {
