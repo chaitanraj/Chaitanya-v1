@@ -13,7 +13,7 @@ import Margin from "@/components/Margin";
 
 export default function Home() {
   return (
-    <main id="home" className="relative">
+    <main id="home" className="min-h-screen relative">
       <Hero />
       <About />
       <Margin />

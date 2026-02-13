@@ -65,7 +65,7 @@ export default function About() {
             initial={{ opacity: 0, y: 12 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
             transition={{ delay: 0.1 }}
-            className="text-3xl sm:text-4xl md:text-5xl font-bold heading-font mb-5 sm:mb-6 text-gradient"
+            className="text-heading font-bold heading-font mb-5 sm:mb-6 text-gradient"
           >
             About Me
           </motion.h2>

@@ -139,13 +139,13 @@ export default function TechStack3() {
           className="max-w-4xl mx-auto"
         >
           {/* Header */}
-          <div className="flex items-end justify-between mb-5 sm:mb-7">
+          <div className="flex justify-between items-center mb-5 sm:mb-7">
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
               transition={{ delay: 0.1 }}
             >
-              <h2 className="text-xl sm:text-2xl md:text-5xl font-bold heading-font text-gradient">
+              <h2 className="text-heading font-bold heading-font text-gradient">
                 Tech Stack
               </h2>
             </motion.div>
@@ -155,25 +155,39 @@ export default function TechStack3() {
               initial={{ opacity: 0, x: -10 }}
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -10 }}
               transition={{ delay: 0.3 }}
-              className="flex items-center gap-1 theme-text-muted text-md sm:text-lg italic font-bold mb-1 sm:mb-2"
+              className="flex items-center gap-2 text-gray-300 text-md sm:text-lg italic font-bold mb-1 sm:mb-2 select-none"
             >
-              <span className="text-gray-300">Drag me!</span>
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                className="theme-text-muted text-gray-300 font-bold rotate-[180deg] sm:w-[22px] sm:h-[22px]"
+              <motion.div
+                animate={{ x: [0, 8, 0] }}
+                transition={{ repeat: Infinity, duration: 1, ease: "easeInOut" }}
+                className="flex items-center gap-1"
               >
-                <path
-                  d="M7 17L17 7M17 7H8M17 7V16"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
+                <svg
+                  width="22"
+                  height="22"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  className="text-gray-300 rotate-[135deg]"
+                >
+                  <path
+                    d="M4 12H20"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                  />
+                  <path
+                    d="M14 6L20 12L14 18"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+                <span className="text-gray-400">Drag the pills</span>
+                <span className="text-lg sm:text-xl">🫳</span>
+              </motion.div>
             </motion.div>
+
           </div>
 
           {/* Skills Container */}
