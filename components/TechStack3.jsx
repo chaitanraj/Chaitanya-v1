@@ -28,6 +28,7 @@ import {
 import { FaJava, FaChrome } from "react-icons/fa";
 import { TbChartLine, TbAlertTriangle } from "react-icons/tb";
 import { MdOutlineTimer } from "react-icons/md";
+import { Vibrate } from "lucide-react";
 
 // Skills data with icons
 const skills = [
@@ -65,33 +66,58 @@ const skills = [
 ];
 
 
-// Single Skill Pill Component - Optimized for mobile performance
+// Single Skill Pill Component
 function SkillPill({ skill, index, isMobile }) {
   const Icon = skill.icon;
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 6 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.1 }}
-      // Faster animation on mobile, reduced stagger
-      transition={{
-        delay: isMobile ? Math.min(index * 0.01, 0.15) : index * 0.02,
-        duration: isMobile ? 0.2 : 0.35,
-        ease: "easeOut"
-      }}
-      drag
-      dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
-      dragElastic={0.15}
-      // Simplified hover/tap for better performance
-      whileHover={isMobile ? undefined : {
-        scale: 1.05,
-        boxShadow:
-          "0 0 20px rgba(255, 122, 24, 0.25), 0 0 40px rgba(201, 24, 255, 0.15)",
-        borderColor: "rgba(255, 122, 24, 0.45)",
-      }}
-      whileTap={{ scale: 0.96 }}
-      className="
+  if (isMobile) {
+    return (
+      <motion.div
+        whileTap={{ scale: 1.05 }}
+        transition={{ duration: 0.2, ease: "easeOut" }}
+        className="
+        inline-flex items-center justify-center
+        gap-1.5 sm:gap-2 rounded-lg
+        bg-[var(--color-glass-bg)] border border-dashed border-[var(--color-glass-border)]
+        backdrop-blur-none sm:backdrop-blur-md
+        cursor-grab active:cursor-grabbing
+        shadow-sm sm:shadow-md shadow-[var(--color-shadow-card)] sm:hover:shadow-lg
+        transition-transform duration-150
+        px-2.5 py-1 text-[10px]
+        sm:px-4 sm:py-2 sm:text-sm
+        pill-item
+      "
+      >
+        <Icon
+          className="shrink-0 h-3.5 w-3.5 sm:h-4 sm:w-4"
+          style={{ color: skill.color }}
+        />
+        <span className="font-medium theme-text-primary whitespace-nowrap text-[11px] sm:text-sm">
+        {skill.name}
+      </span>
+      </motion.div>
+    );
+  } else {
+    return (
+      <motion.div
+        initial={{ opacity: 0, y: 6 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.1 }}
+        transition={{
+          delay: Math.min(index * 0.01, 0.15),
+          duration: 0.3,
+          ease: "easeOut",
+        }}
+        drag
+        dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
+        dragElastic={0.95}
+        whileHover={{
+          scale: 1.05,
+          boxShadow:
+            "0 0 20px rgba(255, 122, 24, 0.25), 0 0 40px rgba(201, 24, 255, 0.15)",
+          borderColor: "rgba(255, 122, 24, 0.45)",
+        }}
+        whileTap={{ scale: 0.96 }}
+        className="
         inline-flex items-center justify-center
         gap-1.5 sm:gap-2 rounded-lg
         bg-[var(--color-glass-bg)] border border-dashed border-[var(--color-glass-border)]
@@ -103,47 +129,50 @@ function SkillPill({ skill, index, isMobile }) {
         sm:px-4 sm:py-2 sm:text-sm
         pill-item
       "
-      style={{ willChange: 'transform' }}
-    >
-      <Icon
-        className="shrink-0 h-3.5 w-3.5 sm:h-4 sm:w-4"
-        style={{ color: skill.color }}
-      />
-      <span className="font-medium theme-text-primary whitespace-nowrap text-[11px] sm:text-sm">
-        {skill.name}
-      </span>
-    </motion.div>
-  );
+        style={{ willChange: "transform" }}
+      >
+        <Icon
+          className="shrink-0 h-3.5 w-3.5 sm:h-4 sm:w-4"
+          style={{ color: skill.color }}
+        />
+        <span className="font-medium theme-text-primary whitespace-nowrap text-[11px] sm:text-sm">
+            {skill.name}
+        </span>
+      </motion.div>
+    );
+  }
 }
 
 export default function TechStack3() {
+
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-60px" });
-
-useEffect(() => {
-  const span = document.getElementById("shaketext");
-
-  function handleMotionEvent(event) {
-    const x = event.accelerationIncludingGravity?.x || 0;
-    const y = event.accelerationIncludingGravity?.y || 0;
-    const z = event.accelerationIncludingGravity?.z || 0;
-
-    const value = Math.abs(x) + Math.abs(y) + Math.abs(z);
-
-    if (value > 30 && span) {
-      span.textContent = "Thanks for the shake";
-    }
-  }
-
-  window.addEventListener("devicemotion", handleMotionEvent);
-
-  return () => {
-    window.removeEventListener("devicemotion", handleMotionEvent);
-  };
-}, []);
-
   // Detect mobile for performance optimizations
   const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const span = document.getElementById("shaketext");
+
+
+    function handleMotionEvent(event) {
+      const x = event.accelerationIncludingGravity?.x || 0;
+      const y = event.accelerationIncludingGravity?.y || 0;
+      const z = event.accelerationIncludingGravity?.z || 0;
+
+      const value = Math.abs(x) + Math.abs(y) + Math.abs(z);
+
+      if (value > 30 && span) {
+        span.textContent = "Thanks for the shake";
+      }
+    }
+
+    window.addEventListener("devicemotion", handleMotionEvent);
+
+    return () => {
+      window.removeEventListener("devicemotion", handleMotionEvent);
+    };
+  }, []);
+
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 640);
@@ -207,8 +236,19 @@ useEffect(() => {
                     strokeLinejoin="round"
                   />
                 </svg>
-                <span className="text-gray-400" id="shaketext">Drag the pills</span>
-                <span className="text-lg sm:text-xl">🫳</span>
+                {(!isMobile) ? (
+                  <>
+                    <span className="text-gray-400">Drag the pills</span>
+                    <span className="text-lg sm:text-xl">🫳</span>
+                  </>
+                ) : (
+                  <>
+                    <span className="text-gray-400" id="shaketext">
+                      Shake your phone
+                    </span>
+                    <Vibrate className="w-5 h-5 text-gray-400" />
+                  </>
+                )}
               </motion.div>
             </motion.div>
 
@@ -219,10 +259,9 @@ useEffect(() => {
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : { opacity: 0 }}
             transition={{ delay: 0.2, duration: 0.5 }}
-            className="
-              flex flex-wrap justify-start gap-0.5 sm:gap-1
-            "
+            className="flex flex-wrap sm:justify-start gap-0.5 sm:gap-1"
           >
+
             {skills.map((skill, index) => (
               <SkillPill key={skill.name} skill={skill} index={index} isMobile={isMobile} />
             ))}
