@@ -167,7 +167,7 @@ export default function TechStack3() {
       const value = Math.abs(x) + Math.abs(y) + Math.abs(z);
 
       if (value > 25) {
-      span.textContent = "Thanks for the shake! 🎉";
+      span.textContent = "Thanks for the shake!";
       
       // Reset after 2 seconds
       setTimeout(() => {
@@ -175,7 +175,7 @@ export default function TechStack3() {
         if (currentSpan) {
           currentSpan.textContent = "Shake your phone";
         }
-      }, 2000);
+      }, 3000);
     }
     }
 
