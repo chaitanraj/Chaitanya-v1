@@ -70,19 +70,24 @@ const skills = [
 function SkillPill({ skill, index, isMobile }) {
   const Icon = skill.icon;
   if (isMobile) {
-    return (
-      <motion.div
-        whileTap={{ scale: 1.05 }}
-        transition={{ duration: 0.2, ease: "easeOut" }}
+    return ( 
+       <motion.div
+        initial={{ opacity: 0, y: 6 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{
+          delay: Math.min(index * 0.01, 0.15),
+          duration: 0.3,
+          ease: "easeOut",
+        }}
+        whileTap={{ scale: 1.2 }}
         className="
         inline-flex items-center justify-center
         gap-1.5 sm:gap-2 rounded-lg
         bg-[var(--color-glass-bg)] border border-dashed border-[var(--color-glass-border)]
         backdrop-blur-none sm:backdrop-blur-md
-        cursor-grab active:cursor-grabbing
         shadow-sm sm:shadow-md shadow-[var(--color-shadow-card)] sm:hover:shadow-lg
         transition-transform duration-150
-        px-2.5 py-1 text-[10px]
+        px-2.5 py-1 text-[11px]
         sm:px-4 sm:py-2 sm:text-sm
         pill-item
       "
@@ -92,8 +97,8 @@ function SkillPill({ skill, index, isMobile }) {
           style={{ color: skill.color }}
         />
         <span className="font-medium theme-text-primary whitespace-nowrap text-[11px] sm:text-sm">
-        {skill.name}
-      </span>
+            {skill.name}
+        </span>
       </motion.div>
     );
   } else {
@@ -151,19 +156,27 @@ export default function TechStack3() {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const span = document.getElementById("shaketext");
-
-
+    
     function handleMotionEvent(event) {
+      const span = document.getElementById("shaketext");
+      if (!span) return;
       const x = event.accelerationIncludingGravity?.x || 0;
       const y = event.accelerationIncludingGravity?.y || 0;
       const z = event.accelerationIncludingGravity?.z || 0;
 
       const value = Math.abs(x) + Math.abs(y) + Math.abs(z);
 
-      if (value > 30 && span) {
-        span.textContent = "Thanks for the shake";
-      }
+      if (value > 25) {
+      span.textContent = "Thanks for the shake! 🎉";
+      
+      // Reset after 2 seconds
+      setTimeout(() => {
+        const currentSpan = document.getElementById("shaketext");
+        if (currentSpan) {
+          currentSpan.textContent = "Shake your phone";
+        }
+      }, 2000);
+    }
     }
 
     window.addEventListener("devicemotion", handleMotionEvent);
@@ -171,7 +184,7 @@ export default function TechStack3() {
     return () => {
       window.removeEventListener("devicemotion", handleMotionEvent);
     };
-  }, []);
+  }, [isMobile]);
 
 
   useEffect(() => {
@@ -256,16 +269,15 @@ export default function TechStack3() {
 
           {/* Skills Container */}
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-            transition={{ delay: 0.2, duration: 0.5 }}
-            className="flex flex-wrap sm:justify-start gap-0.5 sm:gap-1"
-          >
-
-            {skills.map((skill, index) => (
-              <SkillPill key={skill.name} skill={skill} index={index} isMobile={isMobile} />
-            ))}
-          </motion.div>
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}  // ✅ Always visible once mounted
+  transition={{ delay: 0.2, duration: 0.5 }}
+  className="flex flex-wrap sm:justify-start gap-0.5 sm:gap-1"
+>
+  {skills.map((skill, index) => (
+    <SkillPill key={skill.name} skill={skill} index={index} isMobile={isMobile} />
+  ))}
+</motion.div>
         </motion.div>
       </div>
     </section>
